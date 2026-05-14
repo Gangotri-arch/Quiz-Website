@@ -22,11 +22,12 @@ body{
     justify-content:center;
     align-items:center;
     min-height:100vh;
+    padding:20px;
 }
 
 .quiz-box{
-    width:90%;
-    max-width:600px;
+    width:100%;
+    max-width:700px;
     background:white;
     padding:30px;
     border-radius:15px;
@@ -39,9 +40,15 @@ h1{
     color:#007bff;
 }
 
+#questionNumber{
+    margin-bottom:10px;
+    font-size:18px;
+    color:#555;
+}
+
 #question{
-    font-size:22px;
-    margin-bottom:20px;
+    font-size:24px;
+    margin-bottom:25px;
 }
 
 .option{
@@ -51,6 +58,7 @@ h1{
     border-radius:10px;
     cursor:pointer;
     transition:0.3s;
+    font-size:18px;
 }
 
 .option:hover{
@@ -58,25 +66,52 @@ h1{
     color:white;
 }
 
-#nextBtn{
-    width:100%;
-    padding:15px;
-    border:none;
-    background:#28a745;
+.selected{
+    background:#28a745 !important;
     color:white;
-    font-size:18px;
+}
+
+.review{
+    border:3px solid orange;
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-top:25px;
+}
+
+.buttons button{
+    flex:1;
+    padding:14px;
+    border:none;
     border-radius:10px;
     cursor:pointer;
+    font-size:17px;
+    color:white;
 }
 
-#nextBtn:hover{
-    background:#1e7e34;
+#prevBtn{
+    background:#6c757d;
 }
 
-#score{
+#nextBtn{
+    background:#007bff;
+}
+
+#reviewBtn{
+    background:#ff9800;
+}
+
+#submitBtn{
+    background:#28a745;
+}
+
+#result{
+    margin-top:25px;
     text-align:center;
     font-size:24px;
-    margin-top:20px;
     color:#007bff;
 }
 
@@ -89,17 +124,25 @@ h1{
 
 <h1>Art & Culture Quiz</h1>
 
-<div id="question">
-Question comes here
-</div>
+<div id="questionNumber"></div>
+
+<div id="question"></div>
 
 <div id="options"></div>
 
-<button id="nextBtn">
-Next Question
-</button>
+<div class="buttons">
 
-<div id="score"></div>
+<button id="prevBtn">Previous</button>
+
+<button id="nextBtn">Next</button>
+
+<button id="reviewBtn">Mark For Review</button>
+
+<button id="submitBtn">Submit</button>
+
+</div>
+
+<div id="result"></div>
 
 </div>
 
@@ -109,90 +152,148 @@ const quizData = [
 
 {
 question:"Who wrote Vande Mataram?",
-options:["Bankim Chandra Chattopadhyay","Rabindranath Tagore","Premchand","Kalidas"],
-answer:"Bankim Chandra Chattopadhyay"
+options:[
+"A. Bankim Chandra Chattopadhyay",
+"B. Rabindranath Tagore",
+"C. Premchand",
+"D. Kalidas"
+],
+answer:"A. Bankim Chandra Chattopadhyay"
 },
 
 {
 question:"Kathak is a famous form of?",
-options:["Dance","Painting","Music","Drama"],
-answer:"Dance"
+options:[
+"A. Painting",
+"B. Music",
+"C. Dance",
+"D. Drama"
+],
+answer:"C. Dance"
 },
 
 {
 question:"Bharatanatyam originated in which state?",
-options:["Kerala","Tamil Nadu","Punjab","Rajasthan"],
-answer:"Tamil Nadu"
+options:[
+"A. Kerala",
+"B. Tamil Nadu",
+"C. Punjab",
+"D. Rajasthan"
+],
+answer:"B. Tamil Nadu"
 }
 
 ];
 
 let currentQuestion = 0;
-let score = 0;
 
-const questionEl = document.getElementById("question");
-const optionsEl = document.getElementById("options");
-const nextBtn = document.getElementById("nextBtn");
-const scoreEl = document.getElementById("score");
+let userAnswers = new Array(quizData.length).fill(null);
+
+let markedReview = new Array(quizData.length).fill(false);
+
+const questionNumber =
+document.getElementById("questionNumber");
+
+const question =
+document.getElementById("question");
+
+const options =
+document.getElementById("options");
+
+const result =
+document.getElementById("result");
 
 function loadQuestion(){
 
-    let currentQuiz = quizData[currentQuestion];
+    let q = quizData[currentQuestion];
 
-    questionEl.innerText = currentQuiz.question;
+    questionNumber.innerText =
+    "Question " + (currentQuestion + 1) +
+    " of " + quizData.length;
 
-    optionsEl.innerHTML = "";
+    question.innerText = q.question;
 
-    currentQuiz.options.forEach(option => {
+    options.innerHTML = "";
 
-        const btn = document.createElement("div");
+    q.options.forEach(option => {
 
-        btn.innerText = option;
+        let div = document.createElement("div");
 
-        btn.classList.add("option");
+        div.classList.add("option");
 
-        btn.onclick = () => selectAnswer(option);
+        div.innerText = option;
 
-        optionsEl.appendChild(btn);
+        if(userAnswers[currentQuestion] === option){
+            div.classList.add("selected");
+        }
+
+        if(markedReview[currentQuestion]){
+            div.classList.add("review");
+        }
+
+        div.onclick = () => {
+
+            userAnswers[currentQuestion] = option;
+
+            loadQuestion();
+        };
+
+        options.appendChild(div);
 
     });
 
 }
 
-function selectAnswer(selected){
+document.getElementById("nextBtn")
+.onclick = () => {
 
-    if(selected === quizData[currentQuestion].answer){
+    if(currentQuestion < quizData.length - 1){
 
-        score++;
-
-    }
-
-}
-
-nextBtn.addEventListener("click", () => {
-
-    currentQuestion++;
-
-    if(currentQuestion < quizData.length){
+        currentQuestion++;
 
         loadQuestion();
-
     }
 
-    else{
+};
 
-        questionEl.innerText = "Quiz Completed";
+document.getElementById("prevBtn")
+.onclick = () => {
 
-        optionsEl.innerHTML = "";
+    if(currentQuestion > 0){
 
-        nextBtn.style.display = "none";
+        currentQuestion--;
 
-        scoreEl.innerText =
-        "Your Score: " + score + "/" + quizData.length;
-
+        loadQuestion();
     }
 
-});
+};
+
+document.getElementById("reviewBtn")
+.onclick = () => {
+
+    markedReview[currentQuestion] = true;
+
+    loadQuestion();
+};
+
+document.getElementById("submitBtn")
+.onclick = () => {
+
+    let score = 0;
+
+    quizData.forEach((q,index) => {
+
+        if(userAnswers[index] === q.answer){
+
+            score++;
+        }
+
+    });
+
+    result.innerText =
+    "Your Score: " + score +
+    " / " + quizData.length;
+};
 
 loadQuestion();
 
