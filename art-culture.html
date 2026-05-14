@@ -40,16 +40,32 @@ h1{
     color:#007bff;
 }
 
+/* Timer */
+
+#timer{
+    text-align:center;
+    font-size:24px;
+    color:red;
+    margin-bottom:20px;
+    font-weight:bold;
+}
+
+/* Question Number */
+
 #questionNumber{
     margin-bottom:10px;
     font-size:18px;
     color:#555;
 }
 
+/* Question */
+
 #question{
     font-size:24px;
     margin-bottom:25px;
 }
+
+/* Options */
 
 .option{
     background:#e9ecef;
@@ -74,6 +90,8 @@ h1{
 .review{
     border:3px solid orange;
 }
+
+/* Buttons */
 
 .buttons{
     display:flex;
@@ -108,6 +126,8 @@ h1{
     background:#28a745;
 }
 
+/* Result */
+
 #result{
     margin-top:25px;
     text-align:center;
@@ -124,11 +144,25 @@ h1{
 
 <h1>Art & Culture Quiz</h1>
 
+<!-- Timer -->
+
+<div id="timer">
+⏳ Time Left: 10:00
+</div>
+
+<!-- Question Number -->
+
 <div id="questionNumber"></div>
+
+<!-- Question -->
 
 <div id="question"></div>
 
+<!-- Options -->
+
 <div id="options"></div>
+
+<!-- Buttons -->
 
 <div class="buttons">
 
@@ -142,11 +176,15 @@ h1{
 
 </div>
 
+<!-- Result -->
+
 <div id="result"></div>
 
 </div>
 
 <script>
+
+/* Quiz Questions */
 
 const quizData = [
 
@@ -185,11 +223,17 @@ answer:"B. Tamil Nadu"
 
 ];
 
+/* Variables */
+
 let currentQuestion = 0;
 
-let userAnswers = new Array(quizData.length).fill(null);
+let userAnswers =
+new Array(quizData.length).fill(null);
 
-let markedReview = new Array(quizData.length).fill(false);
+let markedReview =
+new Array(quizData.length).fill(false);
+
+/* Elements */
 
 const questionNumber =
 document.getElementById("questionNumber");
@@ -202,6 +246,8 @@ document.getElementById("options");
 
 const result =
 document.getElementById("result");
+
+/* Load Question */
 
 function loadQuestion(){
 
@@ -217,17 +263,20 @@ function loadQuestion(){
 
     q.options.forEach(option => {
 
-        let div = document.createElement("div");
+        let div =
+        document.createElement("div");
 
         div.classList.add("option");
 
         div.innerText = option;
 
         if(userAnswers[currentQuestion] === option){
+
             div.classList.add("selected");
         }
 
         if(markedReview[currentQuestion]){
+
             div.classList.add("review");
         }
 
@@ -244,6 +293,8 @@ function loadQuestion(){
 
 }
 
+/* Next Button */
+
 document.getElementById("nextBtn")
 .onclick = () => {
 
@@ -255,6 +306,8 @@ document.getElementById("nextBtn")
     }
 
 };
+
+/* Previous Button */
 
 document.getElementById("prevBtn")
 .onclick = () => {
@@ -268,6 +321,8 @@ document.getElementById("prevBtn")
 
 };
 
+/* Mark For Review */
+
 document.getElementById("reviewBtn")
 .onclick = () => {
 
@@ -275,6 +330,8 @@ document.getElementById("reviewBtn")
 
     loadQuestion();
 };
+
+/* Submit Button */
 
 document.getElementById("submitBtn")
 .onclick = () => {
@@ -291,9 +348,64 @@ document.getElementById("submitBtn")
     });
 
     result.innerText =
-    "Your Score: " + score +
-    " / " + quizData.length;
+    "Your Score: " +
+    score + " / " + quizData.length;
 };
+
+/* Timer */
+
+let timeLeft = 600;
+
+const timer =
+document.getElementById("timer");
+
+const countdown = setInterval(() => {
+
+    let minutes =
+    Math.floor(timeLeft / 60);
+
+    let seconds =
+    timeLeft % 60;
+
+    if(seconds < 10){
+
+        seconds = "0" + seconds;
+    }
+
+    timer.innerText =
+    "⏳ Time Left: " +
+    minutes + ":" + seconds;
+
+    timeLeft--;
+
+    if(timeLeft < 0){
+
+        clearInterval(countdown);
+
+        let score = 0;
+
+        quizData.forEach((q,index) => {
+
+            if(userAnswers[index] === q.answer){
+
+                score++;
+            }
+
+        });
+
+        result.innerText =
+        "Time Over! Your Score: " +
+        score + " / " + quizData.length;
+
+        options.innerHTML = "";
+
+        question.innerText =
+        "Quiz Submitted Automatically";
+    }
+
+},1000);
+
+/* Start Quiz */
 
 loadQuestion();
 
