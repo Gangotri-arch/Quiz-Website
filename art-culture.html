@@ -190,7 +190,7 @@ button{
 
 <script>
 
-/* LANGUAGE FIX */
+/* LANGUAGE */
 function toggleLanguage(){
 
     lang = (lang === "en") ? "hi" : "en";
@@ -200,7 +200,6 @@ function toggleLanguage(){
     loadQ();
 }
 
-/* APPLY LANGUAGE */
 function applyLanguage(){
 
     document.getElementById("langBtn").innerText =
@@ -222,21 +221,27 @@ function applyLanguage(){
     (lang === "hi") ? "सबमिट" : "Submit";
 }
 
-/* QUESTIONS */
+/* QUIZ DATA (BILINGUAL) */
 const quizData = [
 {
-q:"Who wrote Vande Mataram?",
-o:["A Bankim","B Tagore","C Premchand","D Kalidas"],
+q_en:"Who wrote Vande Mataram?",
+q_hi:"वंदे मातरम् किसने लिखा?",
+o_en:["A Bankim","B Tagore","C Premchand","D Kalidas"],
+o_hi:["A बंकिम","B टैगोर","C प्रेमचंद","D कालिदास"],
 a:"A Bankim"
 },
 {
-q:"Kathak is?",
-o:["A Painting","B Music","C Dance","D Drama"],
+q_en:"Kathak is?",
+q_hi:"कत्थक क्या है?",
+o_en:["A Painting","B Music","C Dance","D Drama"],
+o_hi:["A चित्रकला","B संगीत","C नृत्य","D नाटक"],
 a:"C Dance"
 },
 {
-q:"Bharatanatyam belongs to?",
-o:["A Kerala","B Tamil Nadu","C Punjab","D Rajasthan"],
+q_en:"Bharatanatyam belongs to?",
+q_hi:"भरतनाट्यम किससे संबंधित है?",
+o_en:["A Kerala","B Tamil Nadu","C Punjab","D Rajasthan"],
+o_hi:["A केरल","B तमिलनाडु","C पंजाब","D राजस्थान"],
 a:"B Tamil Nadu"
 }
 ];
@@ -259,11 +264,13 @@ function loadQ(){
     qno.innerText = `Question ${index+1}/${quizData.length}`;
 
     question.innerText =
-    (lang === "hi") ? translate(q.q) : q.q;
+    (lang === "hi") ? q.q_hi : q.q_en;
 
     options.innerHTML = "";
 
-    q.o.forEach(opt=>{
+    let optList = (lang === "hi") ? q.o_hi : q.o_en;
+
+    optList.forEach(opt=>{
 
         let div = document.createElement("div");
         div.className = "option";
@@ -284,18 +291,6 @@ function loadQ(){
     });
 
     updatePalette();
-}
-
-/* SIMPLE TRANSLATION */
-function translate(text){
-
-    const map = {
-        "Who wrote Vande Mataram?":"वंदे मातरम् किसने लिखा?",
-        "Kathak is?":"कत्थक क्या है?",
-        "Bharatanatyam belongs to?":"भरतनाट्यम किससे संबंधित है?"
-    };
-
-    return map[text] || text;
 }
 
 /* PALETTE */
@@ -371,7 +366,7 @@ function showResult(){
 
         html += `
         <div style="margin:10px;padding:10px;border:1px solid #ccc;text-align:left;">
-            <h3>Q${i+1}. ${q.q}</h3>
+            <h3>Q${i+1}. ${lang === "hi" ? q.q_hi : q.q_en}</h3>
             <p>Your: ${u || "Not Attempted"}</p>
             <p>Correct: ${c}</p>
             <p>${status}</p>
