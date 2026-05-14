@@ -40,7 +40,6 @@ h1{
     color:#007bff;
 }
 
-/* Timer */
 #timer{
     text-align:center;
     font-size:22px;
@@ -49,7 +48,6 @@ h1{
     font-weight:bold;
 }
 
-/* Question */
 #questionNumber{
     margin-bottom:10px;
     font-size:16px;
@@ -61,7 +59,6 @@ h1{
     margin-bottom:20px;
 }
 
-/* Options */
 .option{
     background:#e9ecef;
     padding:12px;
@@ -85,7 +82,6 @@ h1{
     border:2px solid orange;
 }
 
-/* Buttons */
 .buttons{
     display:flex;
     flex-wrap:wrap;
@@ -108,7 +104,6 @@ h1{
 #reviewBtn{background:#ff9800;}
 #submitBtn{background:#28a745;}
 
-/* Result */
 #result{
     margin-top:20px;
     text-align:center;
@@ -148,7 +143,7 @@ h1{
 
 <script>
 
-/* Questions */
+/* QUESTIONS */
 const quizData = [
 {
 question:"Who wrote Vande Mataram?",
@@ -167,7 +162,7 @@ answer:"B. Tamil Nadu"
 }
 ];
 
-/* Variables */
+/* VARIABLES */
 let currentQuestion = 0;
 let userAnswers = new Array(quizData.length).fill(null);
 let markedReview = new Array(quizData.length).fill(false);
@@ -178,7 +173,7 @@ const options = document.getElementById("options");
 const result = document.getElementById("result");
 const timerEl = document.getElementById("timer");
 
-/* Load Question */
+/* LOAD QUESTION */
 function loadQuestion(){
 
     let q = quizData[currentQuestion];
@@ -213,7 +208,7 @@ function loadQuestion(){
     });
 }
 
-/* Navigation */
+/* NAVIGATION */
 document.getElementById("nextBtn").onclick = () => {
     if(currentQuestion < quizData.length - 1){
         currentQuestion++;
@@ -233,12 +228,13 @@ document.getElementById("reviewBtn").onclick = () => {
     loadQuestion();
 };
 
-/* FINAL RESULT FUNCTION */
+/* RESULT FUNCTION */
 function showResult(){
 
     clearInterval(countdown);
 
     let score = 0;
+
     let reviewHTML = "";
 
     quizData.forEach((q,index) => {
@@ -248,17 +244,22 @@ function showResult(){
 
         let status = "";
 
-        if(userAns === correctAns){
+        // ✅ FIXED LOGIC
+        if(userAns === null){
+            status = "⚪ Not Attempted";
+        }
+        else if(userAns === correctAns){
             score++;
             status = "✅ Correct";
-        } else {
+        }
+        else{
             status = "❌ Wrong";
         }
 
         reviewHTML += `
         <div style="margin-top:15px;padding:10px;border:1px solid #ddd;border-radius:8px;text-align:left;">
             <h3>Q${index+1}. ${q.question}</h3>
-            <p><b>Your Answer:</b> ${userAns || "Not Attempted"}</p>
+            <p><b>Your Answer:</b> ${userAns ? userAns : "Not Attempted"}</p>
             <p><b>Correct Answer:</b> ${correctAns}</p>
             <p>${status}</p>
         </div>
@@ -277,7 +278,6 @@ function showResult(){
     `;
 }
 
-/* Submit */
 document.getElementById("submitBtn").onclick = showResult;
 
 /* TIMER */
