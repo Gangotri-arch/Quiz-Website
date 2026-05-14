@@ -7,7 +7,6 @@
 
 <title>Art & Culture Quiz</title>
 
-<!-- LANGUAGE STORAGE -->
 <script>
 let lang = localStorage.getItem("lang") || "en";
 </script>
@@ -67,7 +66,11 @@ body{
 .answered{ background:#28a745; color:white; }
 .reviewed{ background:#ff9800; color:white; }
 
-h1{ text-align:center; color:#007bff; }
+/* TEXT */
+h1{
+    text-align:center;
+    color:#007bff;
+}
 
 #timer{
     text-align:center;
@@ -100,6 +103,7 @@ h1{ text-align:center; color:#007bff; }
     color:white;
 }
 
+/* BUTTONS */
 .buttons{
     display:flex;
     gap:10px;
@@ -134,6 +138,7 @@ button{
     z-index:999;
 }
 
+/* RESULT */
 #result{
     margin-top:20px;
     text-align:center;
@@ -152,7 +157,7 @@ button{
 <!-- QUIZ -->
 <div class="quiz-box">
 
-<h1>Art & Culture Quiz</h1>
+<h1 id="title">Art & Culture Quiz</h1>
 
 <div id="timer">⏳ 10:00</div>
 
@@ -185,23 +190,36 @@ button{
 
 <script>
 
-/* LANGUAGE FUNCTION */
+/* LANGUAGE FIX */
 function toggleLanguage(){
 
     lang = (lang === "en") ? "hi" : "en";
     localStorage.setItem("lang", lang);
+
     applyLanguage();
+    loadQ();
 }
 
+/* APPLY LANGUAGE */
 function applyLanguage(){
 
-    let btn = document.getElementById("langBtn");
+    document.getElementById("langBtn").innerText =
+    (lang === "hi") ? "English" : "हिन्दी";
 
-    if(lang === "hi"){
-        btn.innerText = "English";
-    } else {
-        btn.innerText = "हिन्दी";
-    }
+    document.getElementById("title").innerText =
+    (lang === "hi") ? "कला और संस्कृति क्विज" : "Art & Culture Quiz";
+
+    document.getElementById("prevBtn").innerText =
+    (lang === "hi") ? "पिछला" : "Previous";
+
+    document.getElementById("nextBtn").innerText =
+    (lang === "hi") ? "अगला" : "Next";
+
+    document.getElementById("reviewBtn").innerText =
+    (lang === "hi") ? "रिव्यू" : "Mark Review";
+
+    document.getElementById("submitBtn").innerText =
+    (lang === "hi") ? "सबमिट" : "Submit";
 }
 
 /* QUESTIONS */
@@ -233,13 +251,15 @@ const options = document.getElementById("options");
 const palette = document.getElementById("palette");
 const result = document.getElementById("result");
 
-/* LOAD */
+/* LOAD QUESTION */
 function loadQ(){
 
     let q = quizData[index];
 
     qno.innerText = `Question ${index+1}/${quizData.length}`;
-    question.innerText = q.q;
+
+    question.innerText =
+    (lang === "hi") ? translate(q.q) : q.q;
 
     options.innerHTML = "";
 
@@ -264,6 +284,18 @@ function loadQ(){
     });
 
     updatePalette();
+}
+
+/* SIMPLE TRANSLATION */
+function translate(text){
+
+    const map = {
+        "Who wrote Vande Mataram?":"वंदे मातरम् किसने लिखा?",
+        "Kathak is?":"कत्थक क्या है?",
+        "Bharatanatyam belongs to?":"भरतनाट्यम किससे संबंधित है?"
+    };
+
+    return map[text] || text;
 }
 
 /* PALETTE */
@@ -353,7 +385,8 @@ function showResult(){
     document.getElementById("questionNumber").style.display="none";
     document.getElementById("question").style.display="none";
 
-    result.innerHTML = `<h2>Score: ${score}/${quizData.length}</h2>` + html;
+    result.innerHTML =
+    `<h2>Score: ${score}/${quizData.length}</h2>` + html;
 }
 
 document.getElementById("submitBtn").onclick = showResult;
@@ -368,7 +401,8 @@ const timer = setInterval(()=>{
 
     if(s<10) s="0"+s;
 
-    document.getElementById("timer").innerText = `⏳ ${m}:${s}`;
+    document.getElementById("timer").innerText =
+    `⏳ ${m}:${s}`;
 
     timeLeft--;
 
