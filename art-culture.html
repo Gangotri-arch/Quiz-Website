@@ -1,12 +1,202 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<title>Art-Culture</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Art & Culture Quiz</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.quiz-box{
+    width:90%;
+    max-width:600px;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:#007bff;
+}
+
+#question{
+    font-size:22px;
+    margin-bottom:20px;
+}
+
+.option{
+    background:#e9ecef;
+    padding:15px;
+    margin-bottom:15px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.option:hover{
+    background:#007bff;
+    color:white;
+}
+
+#nextBtn{
+    width:100%;
+    padding:15px;
+    border:none;
+    background:#28a745;
+    color:white;
+    font-size:18px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+#nextBtn:hover{
+    background:#1e7e34;
+}
+
+#score{
+    text-align:center;
+    font-size:24px;
+    margin-top:20px;
+    color:#007bff;
+}
+
+</style>
 </head>
 
 <body>
 
-<h1>Art-Culture Page</h1>
+<div class="quiz-box">
+
+<h1>Art & Culture Quiz</h1>
+
+<div id="question">
+Question comes here
+</div>
+
+<div id="options"></div>
+
+<button id="nextBtn">
+Next Question
+</button>
+
+<div id="score"></div>
+
+</div>
+
+<script>
+
+const quizData = [
+
+{
+question:"Who wrote Vande Mataram?",
+options:["Bankim Chandra Chattopadhyay","Rabindranath Tagore","Premchand","Kalidas"],
+answer:"Bankim Chandra Chattopadhyay"
+},
+
+{
+question:"Kathak is a famous form of?",
+options:["Dance","Painting","Music","Drama"],
+answer:"Dance"
+},
+
+{
+question:"Bharatanatyam originated in which state?",
+options:["Kerala","Tamil Nadu","Punjab","Rajasthan"],
+answer:"Tamil Nadu"
+}
+
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const questionEl = document.getElementById("question");
+const optionsEl = document.getElementById("options");
+const nextBtn = document.getElementById("nextBtn");
+const scoreEl = document.getElementById("score");
+
+function loadQuestion(){
+
+    let currentQuiz = quizData[currentQuestion];
+
+    questionEl.innerText = currentQuiz.question;
+
+    optionsEl.innerHTML = "";
+
+    currentQuiz.options.forEach(option => {
+
+        const btn = document.createElement("div");
+
+        btn.innerText = option;
+
+        btn.classList.add("option");
+
+        btn.onclick = () => selectAnswer(option);
+
+        optionsEl.appendChild(btn);
+
+    });
+
+}
+
+function selectAnswer(selected){
+
+    if(selected === quizData[currentQuestion].answer){
+
+        score++;
+
+    }
+
+}
+
+nextBtn.addEventListener("click", () => {
+
+    currentQuestion++;
+
+    if(currentQuestion < quizData.length){
+
+        loadQuestion();
+
+    }
+
+    else{
+
+        questionEl.innerText = "Quiz Completed";
+
+        optionsEl.innerHTML = "";
+
+        nextBtn.style.display = "none";
+
+        scoreEl.innerText =
+        "Your Score: " + score + "/" + quizData.length;
+
+    }
+
+});
+
+loadQuestion();
+
+</script>
 
 </body>
 </html>
