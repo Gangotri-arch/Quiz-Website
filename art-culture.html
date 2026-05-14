@@ -20,18 +20,18 @@ body{
     background:#f4f4f4;
 }
 
-/* MAIN LAYOUT */
+/* LAYOUT */
 .wrapper{
     display:flex;
-    justify-content:center;
     gap:20px;
     padding:20px;
+    justify-content:center;
 }
 
 /* QUIZ BOX */
 .quiz-box{
     width:100%;
-    max-width:700px;
+    max-width:750px;
     background:white;
     padding:25px;
     border-radius:15px;
@@ -40,7 +40,7 @@ body{
 
 /* SIDE PANEL */
 .side-panel{
-    width:200px;
+    width:220px;
     background:white;
     padding:15px;
     border-radius:15px;
@@ -59,29 +59,43 @@ body{
 }
 
 /* COLORS */
-.not-answered{ background:#ccc; }
+.not-attempted{ background:#ccc; }
 .answered{ background:#28a745; color:white; }
 .reviewed{ background:#ff9800; color:white; }
 
-h1{
-    text-align:center;
-    color:#007bff;
-}
+/* TEXT */
+h1{ text-align:center; color:#007bff; }
 
 #timer{
     text-align:center;
-    font-size:20px;
+    font-size:22px;
     color:red;
     font-weight:bold;
     margin:10px 0;
 }
 
+#questionNumber{
+    color:#555;
+    margin-bottom:10px;
+}
+
+#question{
+    font-size:22px;
+    margin-bottom:15px;
+}
+
+/* OPTIONS */
 .option{
     background:#e9ecef;
-    padding:10px;
+    padding:12px;
     margin:10px 0;
     border-radius:8px;
     cursor:pointer;
+}
+
+.option:hover{
+    background:#007bff;
+    color:white;
 }
 
 .selected{
@@ -89,6 +103,7 @@ h1{
     color:white;
 }
 
+/* BUTTONS */
 .buttons{
     display:flex;
     gap:10px;
@@ -109,8 +124,9 @@ button{
 #reviewBtn{background:#ff9800;}
 #submitBtn{background:#28a745;}
 
+/* RESULT */
 #result{
-    margin-top:15px;
+    margin-top:20px;
     text-align:center;
 }
 
@@ -121,14 +137,14 @@ button{
 
 <div class="wrapper">
 
-<!-- QUIZ AREA -->
+<!-- QUIZ -->
 <div class="quiz-box">
 
 <h1>Art & Culture Quiz</h1>
 
 <div id="timer">⏳ 10:00</div>
 
-<h3 id="qno"></h3>
+<h3 id="questionNumber"></h3>
 
 <div id="question"></div>
 
@@ -136,9 +152,9 @@ button{
 
 <div class="buttons">
 
-<button id="prevBtn">Prev</button>
+<button id="prevBtn">Previous</button>
 <button id="nextBtn">Next</button>
-<button id="reviewBtn">Mark</button>
+<button id="reviewBtn">Mark Review</button>
 <button id="submitBtn">Submit</button>
 
 </div>
@@ -149,7 +165,7 @@ button{
 
 <!-- SIDE PANEL -->
 <div class="side-panel">
-<h3>Question Palette</h3>
+<h3>Question Board</h3>
 <div id="palette"></div>
 </div>
 
@@ -157,21 +173,36 @@ button{
 
 <script>
 
+/* QUESTIONS */
 const quizData = [
-{q:"Who wrote Vande Mataram?",o:["A Bankim","B Tagore","C Premchand","D Kalidas"],a:"A Bankim"},
-{q:"Kathak is?",o:["A Painting","B Music","C Dance","D Drama"],a:"C Dance"},
-{q:"Bharatanatyam belongs to?",o:["A Kerala","B Tamil Nadu","C Punjab","D Rajasthan"],a:"B Tamil Nadu"}
+{
+q:"Who wrote Vande Mataram?",
+o:["A Bankim","B Tagore","C Premchand","D Kalidas"],
+a:"A Bankim"
+},
+{
+q:"Kathak is?",
+o:["A Painting","B Music","C Dance","D Drama"],
+a:"C Dance"
+},
+{
+q:"Bharatanatyam belongs to?",
+o:["A Kerala","B Tamil Nadu","C Punjab","D Rajasthan"],
+a:"B Tamil Nadu"
+}
 ];
 
+/* VARIABLES */
 let index = 0;
 let answers = new Array(quizData.length).fill(null);
 let review = new Array(quizData.length).fill(false);
 
-const qno = document.getElementById("qno");
+const qno = document.getElementById("questionNumber");
 const question = document.getElementById("question");
 const options = document.getElementById("options");
 const palette = document.getElementById("palette");
 const result = document.getElementById("result");
+const timerEl = document.getElementById("timer");
 
 /* LOAD QUESTION */
 function loadQ(){
@@ -183,7 +214,7 @@ function loadQ(){
 
     options.innerHTML = "";
 
-    q.o.forEach(opt => {
+    q.o.forEach(opt=>{
 
         let div = document.createElement("div");
         div.className = "option";
@@ -194,7 +225,7 @@ function loadQ(){
 
         div.innerText = opt;
 
-        div.onclick = () => {
+        div.onclick = ()=>{
             answers[index] = opt;
             updatePalette();
             loadQ();
@@ -206,7 +237,7 @@ function loadQ(){
     updatePalette();
 }
 
-/* QUESTION BOARD */
+/* PALETTE */
 function updatePalette(){
 
     palette.innerHTML = "";
@@ -223,12 +254,12 @@ function updatePalette(){
             btn.classList.add("answered");
         }
         else{
-            btn.classList.add("not-answered");
+            btn.classList.add("not-attempted");
         }
 
         btn.innerText = i+1;
 
-        btn.onclick = () => {
+        btn.onclick = ()=>{
             index = i;
             loadQ();
         };
@@ -257,21 +288,76 @@ document.getElementById("reviewBtn").onclick = ()=>{
     updatePalette();
 };
 
-/* SUBMIT */
-document.getElementById("submitBtn").onclick = ()=>{
+/* FINAL RESULT */
+function showResult(){
+
+    clearInterval(timer);
 
     let score = 0;
+    let reviewHTML = "";
 
     quizData.forEach((q,i)=>{
-        if(answers[i] === q.a){
-            score++;
+
+        let userAns = answers[i];
+        let correctAns = q.a;
+
+        let status = "";
+
+        if(userAns === null){
+            status = "⚪ Not Attempted";
         }
+        else if(userAns === correctAns){
+            score++;
+            status = "✅ Correct";
+        }
+        else{
+            status = "❌ Wrong";
+        }
+
+        reviewHTML += `
+        <div style="text-align:left;margin:10px 0;padding:10px;border:1px solid #ccc;border-radius:8px;">
+            <h3>Q${i+1}. ${q.q}</h3>
+            <p><b>Your Answer:</b> ${userAns || "Not Attempted"}</p>
+            <p><b>Correct Answer:</b> ${correctAns}</p>
+            <p>${status}</p>
+        </div>
+        `;
     });
 
+    document.querySelector(".buttons").style.display = "none";
+    document.querySelector(".side-panel").style.display = "none";
+    question.style.display = "none";
+    options.style.display = "none";
+    qno.style.display = "none";
+    timerEl.style.display = "none";
+
     result.innerHTML = `
-    <h2>Score: ${score}/${quizData.length}</h2>
+        <h2>Final Score: ${score}/${quizData.length}</h2>
+        ${reviewHTML}
     `;
-};
+}
+
+document.getElementById("submitBtn").onclick = showResult;
+
+/* TIMER */
+let timeLeft = 600;
+
+const timer = setInterval(()=>{
+
+    let m = Math.floor(timeLeft/60);
+    let s = timeLeft%60;
+
+    if(s<10) s="0"+s;
+
+    timerEl.innerText = `⏳ ${m}:${s}`;
+
+    timeLeft--;
+
+    if(timeLeft < 0){
+        showResult();
+    }
+
+},1000);
 
 /* START */
 loadQ();
