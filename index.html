@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,17 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
-    #langBtn{
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    color:#222;
+}
+
+/* Language Button */
+
+#langBtn{
     position:fixed;
     top:20px;
     left:20px;
@@ -26,77 +36,20 @@
     font-size:16px;
     z-index:1000;
 }
-}
-<!-- Language Button -->
 
-<button id="langBtn" onclick="toggleLanguage()">
-हिन्दी
-</button>
+/* Dark Mode Button */
 
-<script>
-
-let currentLanguage = "en";
-
-function toggleLanguage(){
-
-    if(currentLanguage === "en"){
-
-        document.querySelector(".hero h1").innerText =
-        "TrendWise GK में आपका स्वागत है";
-
-        document.querySelector(".hero p").innerText =
-        "डेली क्विज • करंट अफेयर्स • गणित • रीजनिंग";
-
-        document.querySelectorAll(".card h2")[0].innerText =
-        "करंट अफेयर्स";
-
-        document.querySelectorAll(".card h2")[1].innerText =
-        "क्विज";
-
-        document.querySelectorAll(".card h2")[2].innerText =
-        "गणित";
-
-        document.querySelectorAll(".card h2")[3].innerText =
-        "रीजनिंग";
-
-        document.getElementById("langBtn").innerText =
-        "English";
-
-        currentLanguage = "hi";
-    }
-
-    else{
-
-        document.querySelector(".hero h1").innerText =
-        "Prepare For Success";
-
-        document.querySelector(".hero p").innerText =
-        "Daily Quiz • Current Affairs • Maths • Reasoning";
-
-        document.querySelectorAll(".card h2")[0].innerText =
-        "Current Affairs";
-
-        document.querySelectorAll(".card h2")[1].innerText =
-        "Quiz";
-
-        document.querySelectorAll(".card h2")[2].innerText =
-        "Maths";
-
-        document.querySelectorAll(".card h2")[3].innerText =
-        "Reasoning";
-
-        document.getElementById("langBtn").innerText =
-        "हिन्दी";
-
-        currentLanguage = "en";
-    }
-
-}
-
-</script>
-body{
-    background:#f4f4f4;
-    color:#222;
+#darkBtn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    padding:10px 18px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#222;
+    color:white;
+    z-index:1000;
 }
 
 /* Navbar */
@@ -125,7 +78,6 @@ nav ul li a{
     color:white;
     text-decoration:none;
     font-size:18px;
-    transition:0.3s;
 }
 
 nav ul li a:hover{
@@ -155,7 +107,7 @@ nav ul li a:hover{
     font-size:22px;
 }
 
-/* Main Cards */
+/* Cards */
 
 .container{
     width:90%;
@@ -203,7 +155,7 @@ nav ul li a:hover{
     background:#1e7e34;
 }
 
-/* Quote Section */
+/* Quote */
 
 .quote{
     margin:60px 20px;
@@ -223,21 +175,6 @@ footer{
     margin-top:50px;
 }
 
-/* Dark Mode Button */
-
-#darkBtn{
-    position:fixed;
-    top:20px;
-    right:20px;
-    padding:10px 18px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    background:#222;
-    color:white;
-    z-index:1000;
-}
-
 /* Dark Mode */
 
 .dark{
@@ -247,7 +184,6 @@ footer{
 
 .dark .card{
     background:#1f1f1f;
-    color:white;
 }
 
 .dark .card p{
@@ -262,6 +198,12 @@ footer{
 </head>
 
 <body>
+
+<!-- Language Button -->
+
+<button id="langBtn" onclick="toggleLanguage()">
+हिन्दी
+</button>
 
 <!-- Dark Mode Button -->
 
@@ -374,15 +316,78 @@ Open
 
 <footer>
 
-© 2026 EduPrep Website | All Rights Reserved
+© 2026 TrendWise GK | All Rights Reserved
 
 </footer>
 
+<!-- JavaScript -->
+
 <script>
 
-function toggleDarkMode(){
+/* Dark Mode */
 
+function toggleDarkMode(){
     document.body.classList.toggle("dark");
+}
+
+/* Language Switch */
+
+let currentLanguage = "en";
+
+function toggleLanguage(){
+
+    if(currentLanguage === "en"){
+
+        document.querySelector(".hero h1").innerText =
+        "TrendWise GK में आपका स्वागत है";
+
+        document.querySelector(".hero p").innerText =
+        "डेली क्विज • करंट अफेयर्स • गणित • रीजनिंग";
+
+        document.querySelectorAll(".card h2")[0].innerText =
+        "करंट अफेयर्स";
+
+        document.querySelectorAll(".card h2")[1].innerText =
+        "क्विज";
+
+        document.querySelectorAll(".card h2")[2].innerText =
+        "गणित";
+
+        document.querySelectorAll(".card h2")[3].innerText =
+        "रीजनिंग";
+
+        document.getElementById("langBtn").innerText =
+        "English";
+
+        currentLanguage = "hi";
+
+    }
+
+    else{
+
+        document.querySelector(".hero h1").innerText =
+        "Prepare For Success";
+
+        document.querySelector(".hero p").innerText =
+        "Daily Quiz • Current Affairs • Maths • Reasoning";
+
+        document.querySelectorAll(".card h2")[0].innerText =
+        "Current Affairs";
+
+        document.querySelectorAll(".card h2")[1].innerText =
+        "Quiz";
+
+        document.querySelectorAll(".card h2")[2].innerText =
+        "Maths";
+
+        document.querySelectorAll(".card h2")[3].innerText =
+        "Reasoning";
+
+        document.getElementById("langBtn").innerText =
+        "हिन्दी";
+
+        currentLanguage = "en";
+    }
 
 }
 
