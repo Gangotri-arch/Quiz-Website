@@ -215,7 +215,7 @@ nav ul li a{
 
 </div>
 
-<!-- JS -->
+<!-- JS (FIXED ONLY THIS PART) -->
 <script>
 
 /* Dark Mode */
@@ -227,7 +227,7 @@ function toggleDarkMode(){
 let currentLanguage="en";
 
 function toggleLanguage(){
-    alert("Language feature already working");
+    alert("Language working");
 }
 
 /* QUIZ ENGINE */
@@ -236,11 +236,15 @@ let quizData=[];
 let current=0;
 let score=0;
 
-/* API */
+/* API (FIXED) */
 fetch("https://script.google.com/macros/s/AKfycby8HXAFfJLGU9wIO7JLV7Fbv-3O--Nu3KxnK3GqmWMwXbNiOM-oxq_eOvqDp0ME11AZ/exec")
 .then(res=>res.json())
 .then(data=>{
+    console.log("DATA LOADED:", data);
     allQuestions=data;
+})
+.catch(err=>{
+    console.log("ERROR:", err);
 });
 
 /* OPEN QUIZ */
@@ -248,15 +252,23 @@ function openQuiz(){
     document.getElementById("quizSection").style.display="block";
 }
 
-/* START */
+/* START QUIZ */
 function startQuiz(subject){
+
     quizData=allQuestions.filter(q=>q.subject===subject);
+
     current=0;
     score=0;
+
+    if(quizData.length===0){
+        alert("No questions found!");
+        return;
+    }
+
     showQuestion();
 }
 
-/* SHOW */
+/* SHOW QUESTION */
 function showQuestion(){
 
     let q=quizData[current];
@@ -272,32 +284,29 @@ function showQuestion(){
         btn.innerText=opt;
         btn.className="option-btn";
 
-        btn.onclick=()=>checkAnswer(opt);
+        btn.onclick=()=>{
+            if(opt===q.answer) score++;
+        };
 
         box.appendChild(btn);
     });
 }
 
-/* CHECK */
-function checkAnswer(opt){
-    if(opt===quizData[current].answer){
-        score++;
-    }
-}
-
 /* NEXT */
 function nextQuestion(){
+
     current++;
 
     if(current<quizData.length){
         showQuestion();
-    }else{
+    }
+    else{
         document.getElementById("quizSection").innerHTML=
         `Quiz Completed! Score: ${score}/${quizData.length}`;
     }
 }
 
 </script>
-<script src="script.js"></script>
+
 </body>
 </html>
