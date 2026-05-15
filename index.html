@@ -3,59 +3,77 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Study Hub</title>
+  <title>TrendWise GK</title>
 
   <style>
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
-      background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+      background: #f3f4f6;
       scroll-behavior: smooth;
     }
 
+    /* HEADER */
     header {
-      text-align: center;
-      padding: 25px;
-      background: #111827;
+      background: linear-gradient(135deg, #111827, #1f2937);
       color: white;
+      text-align: center;
+      padding: 30px 15px;
     }
 
     header h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: 32px;
+      letter-spacing: 1px;
     }
 
     header p {
       margin-top: 5px;
       color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    /* NAV */
+    nav {
+      margin-top: 15px;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #38bdf8;
     }
 
     /* HOME GRID */
     .container {
-      max-width: 1000px;
-      margin: 30px auto;
+      max-width: 1100px;
+      margin: 40px auto;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
-      padding: 20px;
+      padding: 0 20px;
     }
 
     .card {
       background: white;
-      padding: 30px;
-      border-radius: 15px;
+      padding: 30px 20px;
+      border-radius: 16px;
       text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
       transition: 0.3s;
-      cursor: pointer;
       text-decoration: none;
       color: inherit;
     }
 
     .card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
-      background: #f0f9ff;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+      background: #e0f2fe;
     }
 
     .tag {
@@ -63,32 +81,35 @@
       padding: 5px 10px;
       border-radius: 20px;
       font-size: 12px;
+      background: #dbeafe;
+      color: #1d4ed8;
       margin-bottom: 10px;
-      background: #e0f2fe;
-      color: #0369a1;
     }
 
-    h2 {
+    .card h2 {
+      margin: 10px 0;
       color: #111827;
     }
 
-    p {
+    .card p {
       color: #6b7280;
+      font-size: 14px;
     }
 
     /* SECTIONS */
     section {
-      max-width: 900px;
-      margin: 30px auto;
+      max-width: 1000px;
+      margin: 25px auto;
       background: white;
       padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      border-radius: 14px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
     }
 
     section h2 {
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 8px;
+      border-left: 5px solid #3b82f6;
+      padding-left: 10px;
+      color: #111827;
     }
 
     /* QUIZ GRID */
@@ -101,18 +122,21 @@
 
     .quiz-box {
       background: #f9fafb;
-      border: 1px solid #ddd;
+      border: 1px solid #e5e7eb;
       padding: 15px;
       border-radius: 10px;
       text-align: center;
       transition: 0.3s;
+      font-weight: 500;
     }
 
     .quiz-box:hover {
-      background: #e0f2fe;
+      background: #dbeafe;
       transform: scale(1.05);
+      cursor: pointer;
     }
 
+    /* FOOTER */
     footer {
       text-align: center;
       padding: 15px;
@@ -120,14 +144,23 @@
       color: white;
       margin-top: 40px;
     }
+
   </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header>
-  <h1>Study Hub</h1>
-  <p>Learn • Practice • Improve</p>
+  <h1>TrendWise GK</h1>
+  <p>Learn Smarter • Practice Better • Score Higher</p>
+
+  <nav>
+    <a href="#current">Current</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#maths">Maths</a>
+    <a href="#reasoning">Reasoning</a>
+  </nav>
 </header>
 
 <!-- HOME CARDS -->
@@ -136,25 +169,25 @@
   <a href="#current" class="card">
     <div class="tag">Daily Updates</div>
     <h2>Current Affairs</h2>
-    <p>Latest news & updates</p>
+    <p>Latest GK updates & news</p>
   </a>
 
   <a href="#quiz" class="card">
     <div class="tag">Practice Zone</div>
     <h2>Quiz</h2>
-    <p>MCQs & Subject Wise Tests</p>
+    <p>Subject-wise MCQ tests</p>
   </a>
 
   <a href="#maths" class="card">
-    <div class="tag">Formulas</div>
+    <div class="tag">Numbers</div>
     <h2>Maths</h2>
-    <p>Practice & Short Tricks</p>
+    <p>Formulas & practice</p>
   </a>
 
   <a href="#reasoning" class="card">
-    <div class="tag">Logic Skills</div>
+    <div class="tag">Logic</div>
     <h2>Reasoning</h2>
-    <p>Logical Thinking Practice</p>
+    <p>Brain training questions</p>
   </a>
 
 </div>
@@ -162,13 +195,12 @@
 <!-- CURRENT -->
 <section id="current">
   <h2>Current Affairs</h2>
-  <p>Yahan daily current affairs update add hoga.</p>
+  <p>Daily updated current affairs yahan add honge.</p>
 </section>
 
 <!-- QUIZ -->
 <section id="quiz">
   <h2>Quiz Section</h2>
-  <p>Select your subject:</p>
 
   <div class="quiz-grid">
 
@@ -184,17 +216,18 @@
 <!-- MATHS -->
 <section id="maths">
   <h2>Maths</h2>
-  <p>Maths practice questions and formulas yahan honge.</p>
+  <p>Maths practice questions and shortcuts yahan rahenge.</p>
 </section>
 
 <!-- REASONING -->
 <section id="reasoning">
   <h2>Reasoning</h2>
-  <p>Logical reasoning practice yahan hoga.</p>
+  <p>Logical reasoning practice material yahan hoga.</p>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  © 2026 Study Hub | Built for Learning
+  © 2026 TrendWise GK | All Rights Reserved
 </footer>
 
 </body>
