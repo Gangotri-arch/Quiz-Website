@@ -6,6 +6,13 @@ const supabaseClient = supabase.createClient(
   supabaseKey
 );
 
+/* ---------------- VARIABLES ---------------- */
+let allQuestions = [];
+let quizData = [];
+let current = 0;
+let score = 0;
+
+/* ---------------- LOAD QUESTIONS ---------------- */
 async function loadQuestions() {
   const { data, error } = await supabaseClient
     .from("questions")
@@ -18,115 +25,78 @@ async function loadQuestions() {
 
   console.log("SUPABASE DATA:", data);
 
-  allQuestions = data;
+  allQuestions = data || [];
+
+  // auto start quiz after data loads
+  startQuiz("GK");
 }
 
 loadQuestions();
 
-let allQuestions = [];
-let quizData = [];
-let current = 0;
-let score = 0;
-
-/* 🎮 OPEN QUIZ */
-function openQuiz() {
-    document.getElementById("quizSection").style.display = "block";
-
-    setTimeout(() => {
-        if (allQuestions.length > 0) {
-            startQuiz(allQuestions[0].subject);
-        } else {
-            alert("Data not loaded yet, please refresh");
-        }
-    }, 500);
-}
-
-
-/* 🎯 START QUIZ (BY SUBJECT) */
+/* ---------------- START QUIZ ---------------- */
 function startQuiz(subject) {
-    function waitForDataAndStart(subject) {
 
-    let check = setInterval(() => {
+  quizData = allQuestions.filter(q =>
+    q.category && q.category.trim() === subject
+  );
 
-        if (allQuestions.length > 0) {
+  current = 0;
+  score = 0;
 
-            clearInterval(check);
-            startQuiz(subject);
+  console.log("Quiz Data:", quizData);
 
-        } else {
-            console.log("⏳ Waiting for data...");
-        }
+  if (quizData.length === 0) {
+    alert("No questions found for this category!");
+    return;
+  }
 
-    }, 300);
+  showQuestion();
 }
 
-    console.log("🎯 Subject Selected:", subject);
-
-  quizData = allQuestions;
-
-    current = 0;
-    score = 0;
-
-    console.log("🧠 Filtered Questions:", quizData);
-
-    if (quizData.length === 0) {
-        alert("No questions found for this subject!");
-        return;
-    }
-
-    showQuestion();
-}
-
-
-/* ❓ SHOW QUESTION */
+/* ---------------- SHOW QUESTION ---------------- */
 function showQuestion() {
 
-    let q = quizData[current];
+  let q = quizData[current];
 
-    if (!q) {
-        console.log("❌ No question found");
-        return;
-    }
+  document.getElementById("question").innerText = q.question;
 
-    document.getElementById("question").innerText = q.question;
+  let box = document.getElementById("options");
+  box.innerHTML = "";
 
-    let box = document.getElementById("options");
-    box.innerHTML = "";
+  [q.option_a, q.option_b, q.option_c, q.option_d].forEach(opt => {
 
-    [q.option_a, q.option_b, q.option_c, q.option_d].forEach(opt => {
+    let btn = document.createElement("button");
+    btn.innerText = opt;
+    btn.className = "option-btn";
 
-        let btn = document.createElement("button");
-        btn.innerText = opt;
-        btn.className = "option-btn";
+    btn.onclick = () => checkAnswer(opt);
 
-        btn.onclick = () => checkAnswer(opt);
-
-        box.appendChild(btn);
-    });
+    box.appendChild(btn);
+  });
 }
 
-
-/* ✅ CHECK ANSWER */
+/* ---------------- CHECK ANSWER ---------------- */
 function checkAnswer(selected) {
 
-    if (selected === quizData[current].correct_answer) {
-        score++;
-    }
+  if (selected === quizData[current].correct_answer) {
+    score++;
+  }
+
+  nextQuestion();
 }
 
-
-/* 🔁 NEXT QUESTION */
+/* ---------------- NEXT QUESTION ---------------- */
 function nextQuestion() {
 
-    current++;
+  current++;
 
-    if (current < quizData.length) {
-        showQuestion();
-    } else {
+  if (current < quizData.length) {
+    showQuestion();
+  } else {
 
-        document.getElementById("quizSection").innerHTML = `
-            <h2>Quiz Completed!</h2>
-            <p>Your Score: ${score} / ${quizData.length}</p>
-        `;
-    }
+    document.getElementById("quizSection").innerHTML = `
+      <h2>Quiz Completed!</h2>
+      <p>Your Score: ${score} / ${quizData.length}</p>
+    `;
+  }
 }
