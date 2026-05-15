@@ -8,55 +8,93 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #eef2f7;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #e0f2fe, #f8fafc);
+      scroll-behavior: smooth;
     }
 
     header {
-      background: #1f2937;
-      color: white;
-      padding: 20px;
       text-align: center;
-    }
-
-    nav {
-      margin-top: 10px;
-    }
-
-    nav a {
+      padding: 25px;
+      background: #111827;
       color: white;
-      margin: 0 12px;
-      text-decoration: none;
-      font-weight: bold;
     }
 
-    nav a:hover {
-      color: #38bdf8;
+    header h1 {
+      margin: 0;
+      font-size: 30px;
     }
 
+    header p {
+      margin-top: 5px;
+      color: #cbd5e1;
+    }
+
+    /* HOME GRID */
     .container {
-      padding: 20px;
       max-width: 1000px;
-      margin: auto;
+      margin: 30px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 20px;
     }
 
     .card {
       background: white;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+      background: #f0f9ff;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin-bottom: 10px;
+      background: #e0f2fe;
+      color: #0369a1;
     }
 
     h2 {
       color: #111827;
-      margin-bottom: 10px;
     }
 
-    /* Quiz grid */
+    p {
+      color: #6b7280;
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 900px;
+      margin: 30px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    section h2 {
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 8px;
+    }
+
+    /* QUIZ GRID */
     .quiz-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 15px;
       margin-top: 15px;
     }
@@ -68,20 +106,19 @@
       border-radius: 10px;
       text-align: center;
       transition: 0.3s;
-      cursor: pointer;
     }
 
     .quiz-box:hover {
       background: #e0f2fe;
-      transform: scale(1.03);
+      transform: scale(1.05);
     }
 
     footer {
       text-align: center;
       padding: 15px;
-      background: #1f2937;
+      background: #111827;
       color: white;
-      margin-top: 20px;
+      margin-top: 40px;
     }
   </style>
 </head>
@@ -90,74 +127,74 @@
 
 <header>
   <h1>Study Hub</h1>
-
-  <nav>
-    <a href="#current">Current</a>
-    <a href="#quiz">Quiz</a>
-    <a href="#maths">Maths</a>
-    <a href="#reasoning">Reasoning</a>
-  </nav>
+  <p>Learn • Practice • Improve</p>
 </header>
 
+<!-- HOME CARDS -->
 <div class="container">
 
-  <!-- CURRENT -->
-  <section id="current" class="card">
+  <a href="#current" class="card">
+    <div class="tag">Daily Updates</div>
     <h2>Current Affairs</h2>
-    <p>Latest current affairs updates yahan show honge.</p>
-  </section>
+    <p>Latest news & updates</p>
+  </a>
 
-  <!-- QUIZ -->
-  <section id="quiz" class="card">
-    <h2>Quiz Section</h2>
-    <p>Select your subject:</p>
+  <a href="#quiz" class="card">
+    <div class="tag">Practice Zone</div>
+    <h2>Quiz</h2>
+    <p>MCQs & Subject Wise Tests</p>
+  </a>
 
-    <div class="quiz-grid">
-
-      <div class="quiz-box">
-        <h3>History</h3>
-        <p>Ancient to Modern</p>
-      </div>
-
-      <div class="quiz-box">
-        <h3>Art & Culture</h3>
-        <p>Heritage & Culture</p>
-      </div>
-
-      <div class="quiz-box">
-        <h3>Geography</h3>
-        <p>World & India</p>
-      </div>
-
-      <div class="quiz-box">
-        <h3>Polity & Economics</h3>
-        <p>Constitution & Economy</p>
-      </div>
-
-      <div class="quiz-box">
-        <h3>Science</h3>
-        <p>Physics, Chemistry, Bio</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- MATHS -->
-  <section id="maths" class="card">
+  <a href="#maths" class="card">
+    <div class="tag">Formulas</div>
     <h2>Maths</h2>
-    <p>Practice questions and formulas yahan rahenge.</p>
-  </section>
+    <p>Practice & Short Tricks</p>
+  </a>
 
-  <!-- REASONING -->
-  <section id="reasoning" class="card">
+  <a href="#reasoning" class="card">
+    <div class="tag">Logic Skills</div>
     <h2>Reasoning</h2>
-    <p>Logical reasoning practice yahan hoga.</p>
-  </section>
+    <p>Logical Thinking Practice</p>
+  </a>
 
 </div>
 
+<!-- CURRENT -->
+<section id="current">
+  <h2>Current Affairs</h2>
+  <p>Yahan daily current affairs update add hoga.</p>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <h2>Quiz Section</h2>
+  <p>Select your subject:</p>
+
+  <div class="quiz-grid">
+
+    <div class="quiz-box">History</div>
+    <div class="quiz-box">Art & Culture</div>
+    <div class="quiz-box">Geography</div>
+    <div class="quiz-box">Polity & Economics</div>
+    <div class="quiz-box">Science</div>
+
+  </div>
+</section>
+
+<!-- MATHS -->
+<section id="maths">
+  <h2>Maths</h2>
+  <p>Maths practice questions and formulas yahan honge.</p>
+</section>
+
+<!-- REASONING -->
+<section id="reasoning">
+  <h2>Reasoning</h2>
+  <p>Logical reasoning practice yahan hoga.</p>
+</section>
+
 <footer>
-  <p>© 2026 Study Hub</p>
+  © 2026 Study Hub | Built for Learning
 </footer>
 
 </body>
