@@ -62,9 +62,7 @@ function startQuiz(subject) {
 
     console.log("🎯 Subject Selected:", subject);
 
-    quizData = allQuestions.filter(q =>
-        q.subject && q.subject.trim() === subject.trim()
-    );
+  quizData = allQuestions;
 
     current = 0;
     score = 0;
