@@ -1,4 +1,4 @@
-const supabaseUrl = "https://sorwebstkjxtophrbboh.supabase.co/rest/v1/";
+const supabaseUrl = "https://sorwebstkjxtophrbboh.supabase.co";
 const supabaseKey = "sb_publishable_Idq6skWlkQA8FAOS7a6OSg_ltUSaTrE";
 
 const supabaseClient = supabase.createClient(
