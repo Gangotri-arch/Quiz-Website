@@ -3,60 +3,83 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Study Website</title>
+  <title>Study Hub</title>
 
-  <!-- Basic internal styling so it looks clean even without CSS file -->
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background: #f4f4f4;
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
     }
 
     header {
-      background: #222;
+      background: #1f2937;
       color: white;
-      padding: 15px;
+      padding: 20px;
       text-align: center;
+    }
+
+    nav {
+      margin-top: 10px;
     }
 
     nav a {
       color: white;
-      margin: 0 10px;
+      margin: 0 12px;
       text-decoration: none;
       font-weight: bold;
     }
 
-    section {
-      background: white;
-      margin: 15px;
+    nav a:hover {
+      color: #38bdf8;
+    }
+
+    .container {
       padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #111827;
+      margin-bottom: 10px;
+    }
+
+    /* Quiz grid */
+    .quiz-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .quiz-box {
+      background: #f9fafb;
+      border: 1px solid #ddd;
+      padding: 15px;
       border-radius: 10px;
+      text-align: center;
+      transition: 0.3s;
+      cursor: pointer;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    ul li {
-      margin: 8px 0;
-    }
-
-    ul li a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
-
-    h2, h3 {
-      color: #222;
+    .quiz-box:hover {
+      background: #e0f2fe;
+      transform: scale(1.03);
     }
 
     footer {
       text-align: center;
-      padding: 10px;
-      background: #222;
+      padding: 15px;
+      background: #1f2937;
       color: white;
       margin-top: 20px;
     }
@@ -66,7 +89,7 @@
 <body>
 
 <header>
-  <h1>Study Website</h1>
+  <h1>Study Hub</h1>
 
   <nav>
     <a href="#current">Current</a>
@@ -76,73 +99,65 @@
   </nav>
 </header>
 
-<main>
+<div class="container">
 
   <!-- CURRENT -->
-  <section id="current">
+  <section id="current" class="card">
     <h2>Current Affairs</h2>
-    <p>Yahan daily current affairs update aayega.</p>
+    <p>Latest current affairs updates yahan show honge.</p>
   </section>
 
   <!-- QUIZ -->
-  <section id="quiz">
+  <section id="quiz" class="card">
     <h2>Quiz Section</h2>
+    <p>Select your subject:</p>
 
-    <p>Select Category:</p>
+    <div class="quiz-grid">
 
-    <ul>
-      <li><a href="#history">History</a></li>
-      <li><a href="#art">Art & Culture</a></li>
-      <li><a href="#geography">Geography</a></li>
-      <li><a href="#polity">Polity & Economics</a></li>
-      <li><a href="#science">Science</a></li>
-    </ul>
+      <div class="quiz-box">
+        <h3>History</h3>
+        <p>Ancient to Modern</p>
+      </div>
 
-    <hr>
+      <div class="quiz-box">
+        <h3>Art & Culture</h3>
+        <p>Heritage & Culture</p>
+      </div>
 
-    <div id="history">
-      <h3>History</h3>
-      <p>History quiz content here.</p>
+      <div class="quiz-box">
+        <h3>Geography</h3>
+        <p>World & India</p>
+      </div>
+
+      <div class="quiz-box">
+        <h3>Polity & Economics</h3>
+        <p>Constitution & Economy</p>
+      </div>
+
+      <div class="quiz-box">
+        <h3>Science</h3>
+        <p>Physics, Chemistry, Bio</p>
+      </div>
+
     </div>
-
-    <div id="art">
-      <h3>Art & Culture</h3>
-      <p>Art & Culture quiz content here.</p>
-    </div>
-
-    <div id="geography">
-      <h3>Geography</h3>
-      <p>Geography quiz content here.</p>
-    </div>
-
-    <div id="polity">
-      <h3>Polity & Economics</h3>
-      <p>Polity & Economics quiz content here.</p>
-    </div>
-
-    <div id="science">
-      <h3>Science</h3>
-      <p>Science quiz content here.</p>
-    </div>
-
   </section>
 
   <!-- MATHS -->
-  <section id="maths">
+  <section id="maths" class="card">
     <h2>Maths</h2>
-    <p>Maths practice questions yahan rahenge.</p>
+    <p>Practice questions and formulas yahan rahenge.</p>
   </section>
 
   <!-- REASONING -->
-  <section id="reasoning">
+  <section id="reasoning" class="card">
     <h2>Reasoning</h2>
-    <p>Reasoning practice questions yahan rahenge.</p>
+    <p>Logical reasoning practice yahan hoga.</p>
   </section>
 
-</main>
+</div>
 
 <footer>
-  <p>© 2026 Study Website</p>
+  <p>© 2026 Study Hub</p>
 </footer>
 
 </body>
