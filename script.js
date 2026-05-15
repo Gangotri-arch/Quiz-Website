@@ -27,7 +27,7 @@ loadQuestions();
 
 /* START QUIZ BY CATEGORY */
 function startQuiz(category) {
-
+document.getElementById("quizSection").style.display = "block";
   quizData = allQuestions.filter(q =>
     (q.category || "").trim().toLowerCase() === category.trim().toLowerCase()
   );
