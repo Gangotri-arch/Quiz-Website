@@ -95,7 +95,7 @@ function showQuestion() {
     let box = document.getElementById("options");
     box.innerHTML = "";
 
-    [q.option1, q.option2, q.option3, q.option4].forEach(opt => {
+    [q.option_a, q.option_b, q.option_c, q.option_d].forEach(opt => {
 
         let btn = document.createElement("button");
         btn.innerText = opt;
@@ -111,7 +111,7 @@ function showQuestion() {
 /* ✅ CHECK ANSWER */
 function checkAnswer(selected) {
 
-    if (selected === quizData[current].answer) {
+    if (selected === quizData[current].correct_answer) {
         score++;
     }
 }
