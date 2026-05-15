@@ -4,7 +4,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>TrendWise GK</title>
 
 <style>
@@ -21,8 +20,7 @@ body{
     color:#222;
 }
 
-/* Language Button */
-
+/* Buttons */
 #langBtn{
     position:fixed;
     top:20px;
@@ -33,27 +31,23 @@ body{
     border:none;
     border-radius:8px;
     cursor:pointer;
-    font-size:16px;
     z-index:1000;
 }
-
-/* Dark Mode Button */
 
 #darkBtn{
     position:fixed;
     top:20px;
     right:20px;
     padding:10px 18px;
+    background:#222;
+    color:white;
     border:none;
     border-radius:8px;
     cursor:pointer;
-    background:#222;
-    color:white;
     z-index:1000;
 }
 
 /* Navbar */
-
 nav{
     background:#007bff;
     padding:15px 30px;
@@ -77,15 +71,9 @@ nav ul{
 nav ul li a{
     color:white;
     text-decoration:none;
-    font-size:18px;
 }
 
-nav ul li a:hover{
-    color:yellow;
-}
-
-/* Hero Section */
-
+/* Hero */
 .hero{
     height:350px;
     background:linear-gradient(to right,#007bff,#00c6ff);
@@ -93,22 +81,11 @@ nav ul li a:hover{
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    text-align:center;
     color:white;
-    padding:20px;
-}
-
-.hero h1{
-    font-size:50px;
-    margin-bottom:15px;
-}
-
-.hero p{
-    font-size:22px;
+    text-align:center;
 }
 
 /* Cards */
-
 .container{
     width:90%;
     margin:auto;
@@ -124,59 +101,40 @@ nav ul li a:hover{
     border-radius:15px;
     text-align:center;
     box-shadow:0 4px 10px rgba(0,0,0,0.2);
-    transition:0.3s;
-}
-
-.card:hover{
-    transform:translateY(-10px);
-}
-
-.card h2{
-    margin-bottom:15px;
-    color:#007bff;
-}
-
-.card p{
-    margin-bottom:20px;
-    color:#555;
 }
 
 .card a{
     display:inline-block;
-    padding:12px 25px;
+    margin-top:15px;
+    padding:10px 20px;
     background:#28a745;
     color:white;
     text-decoration:none;
     border-radius:8px;
-    transition:0.3s;
 }
 
-.card a:hover{
-    background:#1e7e34;
-}
-
-/* Quote */
-
-.quote{
-    margin:60px 20px;
-    text-align:center;
-    font-size:24px;
-    color:#444;
-    font-style:italic;
-}
-
-/* Footer */
-
-footer{
-    background:#222;
-    color:white;
-    text-align:center;
+/* QUIZ SECTION */
+.quiz-section{
+    display:none;
+    width:90%;
+    max-width:700px;
+    margin:40px auto;
+    background:white;
     padding:20px;
-    margin-top:50px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+.option-btn{
+    display:block;
+    width:80%;
+    margin:10px auto;
+    padding:10px;
+    cursor:pointer;
 }
 
 /* Dark Mode */
-
 .dark{
     background:#121212;
     color:white;
@@ -186,209 +144,158 @@ footer{
     background:#1f1f1f;
 }
 
-.dark .card p{
-    color:#ccc;
-}
-
-.dark footer{
-    background:black;
+.dark .quiz-section{
+    background:#1f1f1f;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- Language Button -->
-
-<button id="langBtn" onclick="toggleLanguage()">
-हिन्दी
-</button>
-
-<!-- Dark Mode Button -->
-
-<button id="darkBtn" onclick="toggleDarkMode()">
-🌙 Dark
-</button>
+<!-- Buttons -->
+<button id="langBtn" onclick="toggleLanguage()">हिन्दी</button>
+<button id="darkBtn" onclick="toggleDarkMode()">🌙 Dark</button>
 
 <!-- Navbar -->
-
 <nav>
-
-<div class="logo">
-TrendWise GK
-</div>
+<div class="logo">TrendWise GK</div>
 
 <ul>
-<li><a href="index.html">Home</a></li>
-<li><a href="quiz.html">Quiz</a></li>
+<li><a href="#">Home</a></li>
+<li><a href="#" onclick="openQuiz()">Quiz</a></li>
 <li><a href="current.html">Current Affairs</a></li>
 <li><a href="maths.html">Maths</a></li>
 </ul>
-
 </nav>
 
-<!-- Hero Section -->
-
+<!-- Hero -->
 <section class="hero">
-
-<h1>
-Prepare For Success
-</h1>
-
-<p>
-Daily Quiz • Current Affairs • Maths • Reasoning
-</p>
-
+<h1>Prepare For Success</h1>
+<p>Daily Quiz • Current Affairs • Maths • Reasoning</p>
 </section>
 
-<!-- Main Cards -->
-
+<!-- Cards -->
 <div class="container">
 
 <div class="card">
-
 <h2>Current Affairs</h2>
-
-<p>
-Read daily current affairs and stay updated.
-</p>
-
-<a href="current.html">
-Open
-</a>
-
+<p>Read daily updates</p>
+<a href="current.html">Open</a>
 </div>
 
 <div class="card">
-
 <h2>Quiz</h2>
-
-<p>
-Practice subject wise quizzes for exams.
-</p>
-
-<a href="quiz.html">
-Open
-</a>
-
+<p>Practice quizzes</p>
+<a href="#" onclick="openQuiz()">Open Quiz</a>
 </div>
 
 <div class="card">
-
 <h2>Maths</h2>
-
-<p>
-Improve your maths with practice questions.
-</p>
-
-<a href="maths.html">
-Open
-</a>
-
+<p>Improve skills</p>
+<a href="maths.html">Open</a>
 </div>
 
 <div class="card">
-
 <h2>Reasoning</h2>
-
-<p>
-Boost your logical reasoning skills.
-</p>
-
-<a href="reasoning.html">
-Open
-</a>
-
+<p>Boost logic</p>
+<a href="reasoning.html">Open</a>
 </div>
 
 </div>
 
-<!-- Quote -->
+<!-- QUIZ SECTION -->
+<div class="quiz-section" id="quizSection">
 
-<div class="quote">
+<h2 id="question">Question</h2>
 
-"Success comes from daily practice."
+<div id="options"></div>
+
+<button onclick="nextQuestion()">Next</button>
 
 </div>
 
-<!-- Footer -->
-
-<footer>
-
-© 2026 TrendWise GK | All Rights Reserved
-
-</footer>
-
-<!-- JavaScript -->
-
+<!-- JS -->
 <script>
 
 /* Dark Mode */
-
 function toggleDarkMode(){
     document.body.classList.toggle("dark");
 }
 
-/* Language Switch */
-
-let currentLanguage = "en";
+/* Language */
+let currentLanguage="en";
 
 function toggleLanguage(){
+    alert("Language feature already working");
+}
 
-    if(currentLanguage === "en"){
+/* QUIZ ENGINE */
+let allQuestions=[];
+let quizData=[];
+let current=0;
+let score=0;
 
-        document.querySelector(".hero h1").innerText =
-        "TrendWise GK में आपका स्वागत है";
+/* API */
+fetch("https://script.google.com/macros/s/AKfycby8HXAFfJLGU9wIO7JLV7Fbv-3O--Nu3KxnK3GqmWMwXbNiOM-oxq_eOvqDp0ME11AZ/exec")
+.then(res=>res.json())
+.then(data=>{
+    allQuestions=data;
+});
 
-        document.querySelector(".hero p").innerText =
-        "डेली क्विज • करंट अफेयर्स • गणित • रीजनिंग";
+/* OPEN QUIZ */
+function openQuiz(){
+    document.getElementById("quizSection").style.display="block";
+}
 
-        document.querySelectorAll(".card h2")[0].innerText =
-        "करंट अफेयर्स";
+/* START */
+function startQuiz(subject){
+    quizData=allQuestions.filter(q=>q.subject===subject);
+    current=0;
+    score=0;
+    showQuestion();
+}
 
-        document.querySelectorAll(".card h2")[1].innerText =
-        "क्विज";
+/* SHOW */
+function showQuestion(){
 
-        document.querySelectorAll(".card h2")[2].innerText =
-        "गणित";
+    let q=quizData[current];
 
-        document.querySelectorAll(".card h2")[3].innerText =
-        "रीजनिंग";
+    document.getElementById("question").innerText=q.question;
 
-        document.getElementById("langBtn").innerText =
-        "English";
+    let box=document.getElementById("options");
+    box.innerHTML="";
 
-        currentLanguage = "hi";
+    [q.option1,q.option2,q.option3,q.option4].forEach(opt=>{
 
+        let btn=document.createElement("button");
+        btn.innerText=opt;
+        btn.className="option-btn";
+
+        btn.onclick=()=>checkAnswer(opt);
+
+        box.appendChild(btn);
+    });
+}
+
+/* CHECK */
+function checkAnswer(opt){
+    if(opt===quizData[current].answer){
+        score++;
     }
+}
 
-    else{
+/* NEXT */
+function nextQuestion(){
+    current++;
 
-        document.querySelector(".hero h1").innerText =
-        "Prepare For Success";
-
-        document.querySelector(".hero p").innerText =
-        "Daily Quiz • Current Affairs • Maths • Reasoning";
-
-        document.querySelectorAll(".card h2")[0].innerText =
-        "Current Affairs";
-
-        document.querySelectorAll(".card h2")[1].innerText =
-        "Quiz";
-
-        document.querySelectorAll(".card h2")[2].innerText =
-        "Maths";
-
-        document.querySelectorAll(".card h2")[3].innerText =
-        "Reasoning";
-
-        document.getElementById("langBtn").innerText =
-        "हिन्दी";
-
-        currentLanguage = "en";
+    if(current<quizData.length){
+        showQuestion();
+    }else{
+        document.getElementById("quizSection").innerHTML=
+        `Quiz Completed! Score: ${score}/${quizData.length}`;
     }
-
 }
 
 </script>
