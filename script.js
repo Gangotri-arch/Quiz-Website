@@ -1,49 +1,39 @@
 const supabaseUrl = "https://sorwebstkjxtophrbboh.supabase.co";
 const supabaseKey = "sb_publishable_Idq6skWlkQA8FAOS7a6OSg_ltUSaTrE";
 
-const supabaseClient = supabase.createClient(
-  supabaseUrl,
-  supabaseKey
-);
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-/* ---------------- VARIABLES ---------------- */
 let allQuestions = [];
 let quizData = [];
 let current = 0;
 let score = 0;
 
-/* ---------------- LOAD QUESTIONS ---------------- */
+/* LOAD FROM SUPABASE */
 async function loadQuestions() {
   const { data, error } = await supabaseClient
     .from("questions")
     .select("*");
 
   if (error) {
-    console.log("Error:", error);
+    console.log(error);
     return;
   }
 
-  console.log("SUPABASE DATA:", data);
-
-  allQuestions = data || [];
-
-  // auto start quiz after data loads
-  startQuiz("GK");
+  allQuestions = data;
+  console.log("DATA LOADED:", allQuestions);
 }
 
 loadQuestions();
 
-/* ---------------- START QUIZ ---------------- */
-function startQuiz(subject) {
+/* START QUIZ BY CATEGORY */
+function startQuiz(category) {
 
   quizData = allQuestions.filter(q =>
-    q.category && q.category.trim() === subject
+    (q.category || "").trim().toLowerCase() === category.trim().toLowerCase()
   );
 
   current = 0;
   score = 0;
-
-  console.log("Quiz Data:", quizData);
 
   if (quizData.length === 0) {
     alert("No questions found for this category!");
@@ -53,7 +43,7 @@ function startQuiz(subject) {
   showQuestion();
 }
 
-/* ---------------- SHOW QUESTION ---------------- */
+/* SHOW QUESTION */
 function showQuestion() {
 
   let q = quizData[current];
@@ -67,36 +57,26 @@ function showQuestion() {
 
     let btn = document.createElement("button");
     btn.innerText = opt;
-    btn.className = "option-btn";
 
-    btn.onclick = () => checkAnswer(opt);
+    btn.onclick = () => {
+      if (opt === q.correct_answer) score++;
+      nextQuestion();
+    };
 
     box.appendChild(btn);
   });
 }
 
-/* ---------------- CHECK ANSWER ---------------- */
-function checkAnswer(selected) {
-
-  if (selected === quizData[current].correct_answer) {
-    score++;
-  }
-
-  nextQuestion();
-}
-
-/* ---------------- NEXT QUESTION ---------------- */
+/* NEXT QUESTION */
 function nextQuestion() {
-
   current++;
 
   if (current < quizData.length) {
     showQuestion();
   } else {
-
     document.getElementById("quizSection").innerHTML = `
-      <h2>Quiz Completed!</h2>
-      <p>Your Score: ${score} / ${quizData.length}</p>
+      <h2>Quiz Completed</h2>
+      <p>Score: ${score} / ${quizData.length}</p>
     `;
   }
 }
