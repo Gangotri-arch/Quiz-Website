@@ -2,7 +2,7 @@ let allQuestions = [];
 let quizData = [];
 let current = 0;
 let score = 0;
-
+alert("SCRIPT LOADED");
 // 🔗 Google Sheet API
 fetch("https://script.google.com/macros/s/AKfycby8HXAFfJLGU9wIO7JLV7Fbv-3O--Nu3KxnK3GqmWMwXbNiOM-oxq_eOvqDp0ME11AZ/exec")
   .then(res => res.json())
