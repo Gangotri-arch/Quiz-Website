@@ -1,312 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrendWise GK</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
-body{
-    background:#f4f4f4;
-    color:#222;
-}
-
-/* Buttons */
-#langBtn{
-    position:fixed;
-    top:20px;
-    left:20px;
-    padding:10px 18px;
-    background:#222;
-    color:white;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    z-index:1000;
-}
-
-#darkBtn{
-    position:fixed;
-    top:20px;
-    right:20px;
-    padding:10px 18px;
-    background:#222;
-    color:white;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    z-index:1000;
-}
-
-/* Navbar */
-nav{
-    background:#007bff;
-    padding:15px 30px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    color:white;
-    font-size:28px;
-    font-weight:bold;
-}
-
-nav ul{
-    list-style:none;
-    display:flex;
-    gap:20px;
-}
-
-nav ul li a{
-    color:white;
-    text-decoration:none;
-}
-
-/* Hero */
-.hero{
-    height:350px;
-    background:linear-gradient(to right,#007bff,#00c6ff);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    text-align:center;
-}
-
-/* Cards */
-.container{
-    width:90%;
-    margin:auto;
-    margin-top:50px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:30px;
-}
-
-.card{
-    background:white;
-    padding:40px 20px;
-    border-radius:15px;
-    text-align:center;
-    box-shadow:0 4px 10px rgba(0,0,0,0.2);
-}
-
-.card a{
-    display:inline-block;
-    margin-top:15px;
-    padding:10px 20px;
-    background:#28a745;
-    color:white;
-    text-decoration:none;
-    border-radius:8px;
-}
-
-/* QUIZ SECTION */
-.quiz-section{
-    display:none;
-    width:90%;
-    max-width:700px;
-    margin:40px auto;
-    background:white;
-    padding:20px;
-    border-radius:10px;
-    box-shadow:0 0 10px rgba(0,0,0,0.2);
-    text-align:center;
-}
-
-.option-btn{
-    display:block;
-    width:80%;
-    margin:10px auto;
-    padding:10px;
-    cursor:pointer;
-}
-
-/* Dark Mode */
-.dark{
-    background:#121212;
-    color:white;
-}
-
-.dark .card{
-    background:#1f1f1f;
-}
-
-.dark .quiz-section{
-    background:#1f1f1f;
-}
-
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Website</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
-
 <body>
 
-<!-- Buttons -->
-<button id="langBtn" onclick="toggleLanguage()">हिन्दी</button>
-<button id="darkBtn" onclick="toggleDarkMode()">🌙 Dark</button>
+  <header>
+    <h1>Welcome to My Website</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
 
-<!-- Navbar -->
-<nav>
-<div class="logo">TrendWise GK</div>
+  <main>
+    <section class="hero">
+      <h2>Hello!</h2>
+      <p>This is my simple website.</p>
+    </section>
+  </main>
 
-<ul>
-<li><a href="#">Home</a></li>
-<li><a href="#" onclick="openQuiz()">Quiz</a></li>
-<li><a href="current.html">Current Affairs</a></li>
-<li><a href="maths.html">Maths</a></li>
-</ul>
-</nav>
+  <footer>
+    <p>© 2026 My Website</p>
+  </footer>
 
-<!-- Hero -->
-<section class="hero">
-<h1>Prepare For Success</h1>
-<p>Daily Quiz • Current Affairs • Maths • Reasoning</p>
-</section>
-
-<!-- Cards -->
-<div class="container">
-
-<div class="card">
-<h2>Current Affairs</h2>
-<p>Read daily updates</p>
-<a href="current.html">Open</a>
-</div>
-
-<div class="card">
-<h2>Quiz</h2>
-<p>Practice quizzes</p>
-<a href="#" onclick="openQuiz()">Open Quiz</a>
-</div>
-
-<div class="card">
-<h2>Maths</h2>
-<p>Improve skills</p>
-<a href="maths.html">Open</a>
-</div>
-
-<div class="card">
-<h2>Reasoning</h2>
-<p>Boost logic</p>
-<a href="reasoning.html">Open</a>
-</div>
-
-</div>
-
-<!-- QUIZ SECTION -->
-<div class="quiz-section" id="quizSection" style="display:none;">
-<h2 id="question">Question</h2>
-
-<div id="options"></div>
-
-<button onclick="nextQuestion()">Next</button>
-
-</div>
-
-<!-- JS (FIXED ONLY THIS PART) -->
-<script>
-
-/* Dark Mode */
-function toggleDarkMode(){
-    document.body.classList.toggle("dark");
-}
-
-/* Language */
-let currentLanguage="en";
-
-function toggleLanguage(){
-    alert("Language working");
-}
-
-/* QUIZ ENGINE */
-let allQuestions=[];
-let quizData=[];
-let current=0;
-let score=0;
-
-/* API (FIXED) */
-fetch("https://script.google.com/macros/s/AKfycby8HXAFfJLGU9wIO7JLV7Fbv-3O--Nu3KxnK3GqmWMwXbNiOM-oxq_eOvqDp0ME11AZ/exec")
-.then(res=>res.json())
-.then(data=>{
-    console.log("DATA LOADED:", data);
-    allQuestions=data;
-})
-.catch(err=>{
-    console.log("ERROR:", err);
-});
-
-/* OPEN QUIZ */
-function openQuiz(){
-    document.getElementById("quizSection").style.display="block";
-}
-
-/* START QUIZ */
-function startQuiz(subject){
-
-    quizData=allQuestions.filter(q=>q.subject===subject);
-
-    current=0;
-    score=0;
-
-    if(quizData.length===0){
-        alert("No questions found!");
-        return;
-    }
-
-    showQuestion();
-}
-
-/* SHOW QUESTION */
-function showQuestion(){
-
-    let q=quizData[current];
-
-    document.getElementById("question").innerText=q.question;
-
-    let box=document.getElementById("options");
-    box.innerHTML="";
-
-    [q.option1,q.option2,q.option3,q.option4].forEach(opt=>{
-
-        let btn=document.createElement("button");
-        btn.innerText=opt;
-        btn.className="option-btn";
-
-        btn.onclick=()=>{
-            if(opt===q.answer) score++;
-        };
-
-        box.appendChild(btn);
-    });
-}
-
-/* NEXT */
-function nextQuestion(){
-
-    current++;
-
-    if(current<quizData.length){
-        showQuestion();
-    }
-    else{
-        document.getElementById("quizSection").innerHTML=
-        `Quiz Completed! Score: ${score}/${quizData.length}`;
-    }
-}
-
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
