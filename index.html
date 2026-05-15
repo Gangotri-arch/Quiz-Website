@@ -6,41 +6,80 @@
   <title>TrendWise GK</title>
 
   <style>
+    :root {
+      --bg: #f3f4f6;
+      --card: white;
+      --text: #111827;
+      --sub: #6b7280;
+      --primary: #3b82f6;
+    }
+
+    body.dark {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+      --sub: #cbd5e1;
+      --primary: #38bdf8;
+    }
+
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
-      background: #f3f4f6;
+      background: var(--bg);
+      color: var(--text);
+      transition: 0.3s;
       scroll-behavior: smooth;
     }
 
-    /* HEADER */
     header {
       background: linear-gradient(135deg, #111827, #1f2937);
       color: white;
       text-align: center;
-      padding: 30px 15px;
+      padding: 25px 15px;
     }
 
     header h1 {
       margin: 0;
       font-size: 32px;
-      letter-spacing: 1px;
     }
 
     header p {
       margin-top: 5px;
       color: #cbd5e1;
-      font-size: 14px;
+    }
+
+    /* TOP BUTTONS */
+    .top-bar {
+      margin-top: 10px;
+    }
+
+    button {
+      border: none;
+      padding: 8px 12px;
+      margin: 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn-dark {
+      background: #facc15;
+      color: black;
+    }
+
+    .btn-lang {
+      background: #22c55e;
+      color: white;
     }
 
     /* NAV */
     nav {
-      margin-top: 15px;
+      margin-top: 10px;
     }
 
     nav a {
       color: white;
-      margin: 0 12px;
+      margin: 0 10px;
       text-decoration: none;
       font-weight: 500;
     }
@@ -49,7 +88,7 @@
       color: #38bdf8;
     }
 
-    /* HOME GRID */
+    /* CARDS */
     .container {
       max-width: 1100px;
       margin: 40px auto;
@@ -60,20 +99,23 @@
     }
 
     .card {
-      background: white;
-      padding: 30px 20px;
+      background: var(--card);
+      padding: 25px;
       border-radius: 16px;
       text-align: center;
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
       transition: 0.3s;
       text-decoration: none;
-      color: inherit;
+      color: var(--text);
     }
 
     .card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-      background: #e0f2fe;
+      background: #dbeafe;
+    }
+
+    body.dark .card:hover {
+      background: #334155;
     }
 
     .tag {
@@ -86,33 +128,6 @@
       margin-bottom: 10px;
     }
 
-    .card h2 {
-      margin: 10px 0;
-      color: #111827;
-    }
-
-    .card p {
-      color: #6b7280;
-      font-size: 14px;
-    }
-
-    /* SECTIONS */
-    section {
-      max-width: 1000px;
-      margin: 25px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 14px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    }
-
-    section h2 {
-      border-left: 5px solid #3b82f6;
-      padding-left: 10px;
-      color: #111827;
-    }
-
-    /* QUIZ GRID */
     .quiz-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -121,8 +136,8 @@
     }
 
     .quiz-box {
-      background: #f9fafb;
-      border: 1px solid #e5e7eb;
+      background: var(--card);
+      border: 1px solid #ccc;
       padding: 15px;
       border-radius: 10px;
       text-align: center;
@@ -131,12 +146,29 @@
     }
 
     .quiz-box:hover {
-      background: #dbeafe;
+      background: #e0f2fe;
       transform: scale(1.05);
       cursor: pointer;
     }
 
-    /* FOOTER */
+    body.dark .quiz-box:hover {
+      background: #334155;
+    }
+
+    section {
+      max-width: 1000px;
+      margin: 25px auto;
+      background: var(--card);
+      padding: 25px;
+      border-radius: 14px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    section h2 {
+      border-left: 5px solid var(--primary);
+      padding-left: 10px;
+    }
+
     footer {
       text-align: center;
       padding: 15px;
@@ -150,10 +182,14 @@
 
 <body>
 
-<!-- HEADER -->
 <header>
   <h1>TrendWise GK</h1>
   <p>Learn Smarter • Practice Better • Score Higher</p>
+
+  <div class="top-bar">
+    <button class="btn-dark" onclick="toggleDark()">🌙 Night Mode</button>
+    <button class="btn-lang" onclick="toggleLang()">🌐 Language</button>
+  </div>
 
   <nav>
     <a href="#current">Current</a>
@@ -163,72 +199,92 @@
   </nav>
 </header>
 
-<!-- HOME CARDS -->
+<!-- HOME -->
 <div class="container">
 
   <a href="#current" class="card">
     <div class="tag">Daily Updates</div>
-    <h2>Current Affairs</h2>
-    <p>Latest GK updates & news</p>
+    <h2 id="t1">Current Affairs</h2>
+    <p id="p1">Latest GK updates</p>
   </a>
 
   <a href="#quiz" class="card">
     <div class="tag">Practice Zone</div>
-    <h2>Quiz</h2>
-    <p>Subject-wise MCQ tests</p>
+    <h2 id="t2">Quiz</h2>
+    <p id="p2">Subject-wise MCQs</p>
   </a>
 
   <a href="#maths" class="card">
     <div class="tag">Numbers</div>
-    <h2>Maths</h2>
-    <p>Formulas & practice</p>
+    <h2 id="t3">Maths</h2>
+    <p id="p3">Practice & formulas</p>
   </a>
 
   <a href="#reasoning" class="card">
     <div class="tag">Logic</div>
-    <h2>Reasoning</h2>
-    <p>Brain training questions</p>
+    <h2 id="t4">Reasoning</h2>
+    <p id="p4">Brain practice</p>
   </a>
 
 </div>
 
-<!-- CURRENT -->
+<!-- SECTIONS -->
 <section id="current">
   <h2>Current Affairs</h2>
-  <p>Daily updated current affairs yahan add honge.</p>
+  <p>Daily updates here.</p>
 </section>
 
-<!-- QUIZ -->
 <section id="quiz">
   <h2>Quiz Section</h2>
 
   <div class="quiz-grid">
-
     <div class="quiz-box">History</div>
     <div class="quiz-box">Art & Culture</div>
     <div class="quiz-box">Geography</div>
     <div class="quiz-box">Polity & Economics</div>
     <div class="quiz-box">Science</div>
-
   </div>
 </section>
 
-<!-- MATHS -->
 <section id="maths">
   <h2>Maths</h2>
-  <p>Maths practice questions and shortcuts yahan rahenge.</p>
+  <p>Math practice here.</p>
 </section>
 
-<!-- REASONING -->
 <section id="reasoning">
   <h2>Reasoning</h2>
-  <p>Logical reasoning practice material yahan hoga.</p>
+  <p>Logical questions here.</p>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  © 2026 TrendWise GK | All Rights Reserved
+  © 2026 TrendWise GK
 </footer>
+
+<script>
+  // DARK MODE
+  function toggleDark() {
+    document.body.classList.toggle("dark");
+  }
+
+  // LANGUAGE TOGGLE (basic demo)
+  let english = true;
+
+  function toggleLang() {
+    english = !english;
+
+    if (!english) {
+      document.getElementById("t1").innerText = "करंट अफेयर्स";
+      document.getElementById("t2").innerText = "क्विज";
+      document.getElementById("t3").innerText = "गणित";
+      document.getElementById("t4").innerText = "रीजनिंग";
+    } else {
+      document.getElementById("t1").innerText = "Current Affairs";
+      document.getElementById("t2").innerText = "Quiz";
+      document.getElementById("t3").innerText = "Maths";
+      document.getElementById("t4").innerText = "Reasoning";
+    }
+  }
+</script>
 
 </body>
 </html>
