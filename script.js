@@ -8,28 +8,26 @@ fetch("https://script.google.com/macros/s/AKfycby8HXAFfJLGU9wIO7JLV7Fbv-3O--Nu3K
 .then(res => res.json())
 .then(data => {
 
-    console.log("📊 DATA LOADED:", data);
+    console.log("DATA RECEIVED:", data);
 
     allQuestions = data;
 
 })
 .catch(err => {
-    console.log("❌ API ERROR:", err);
+    console.log("ERROR:", err);
 });
-
 
 /* 🎮 OPEN QUIZ */
 function openQuiz() {
+    document.getElementById("quizSection").style.display = "block";
 
-   document.getElementById("quizSection").style.display = "block";
-
-    waitForDataAndStart(allQuestions[0]?.subject || "Art & Culture");
-    // auto start first subject safely
-    if (allQuestions && allQuestions.length > 0) {
-        startQuiz(allQuestions[0].subject);
-    } else {
-        console.log("⚠ Data not loaded yet");
-    }
+    setTimeout(() => {
+        if (allQuestions.length > 0) {
+            startQuiz(allQuestions[0].subject);
+        } else {
+            alert("Data not loaded yet, please refresh");
+        }
+    }, 500);
 }
 
 
