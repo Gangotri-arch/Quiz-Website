@@ -16,7 +16,9 @@ async function loadQuestions() {
     return;
   }
 
-  console.log(data);
+  console.log("SUPABASE DATA:", data);
+
+  allQuestions = data;
 }
 
 loadQuestions();
@@ -25,20 +27,6 @@ let allQuestions = [];
 let quizData = [];
 let current = 0;
 let score = 0;
-
-/* 🔗 Google Sheet API */
-fetch("https://script.google.com/macros/s/AKfycby8HXAFfJLGU9wIO7JLV7Fbv-3O--Nu3KxnK3GqmWMwXbNiOM-oxq_eOvqDp0ME11AZ/exec")
-.then(res => res.json())
-.then(data => {
-
-    console.log("DATA RECEIVED:", data);
-
-    allQuestions = data;
-
-})
-.catch(err => {
-    console.log("ERROR:", err);
-});
 
 /* 🎮 OPEN QUIZ */
 function openQuiz() {
