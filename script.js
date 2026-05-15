@@ -2,92 +2,108 @@ let allQuestions = [];
 let quizData = [];
 let current = 0;
 let score = 0;
-alert("SCRIPT LOADED");
-// 🔗 Google Sheet API
+
+/* 🔗 Google Sheet API */
 fetch("https://script.google.com/macros/s/AKfycby8HXAFfJLGU9wIO7JLV7Fbv-3O--Nu3KxnK3GqmWMwXbNiOM-oxq_eOvqDp0ME11AZ/exec")
-  .then(res => res.json())
-  .then(data => {
-    console.log("📊 DATA FROM SHEET:", data);
+.then(res => res.json())
+.then(data => {
+
+    console.log("📊 DATA LOADED:", data);
+
     allQuestions = data;
-  })
-  .catch(err => {
+
+})
+.catch(err => {
     console.log("❌ API ERROR:", err);
-  });
+});
 
 
-// 🎯 START QUIZ
+/* 🎮 OPEN QUIZ */
+function openQuiz() {
+
+    document.getElementById("quizSection").style.display = "block";
+
+    // auto start first subject safely
+    if (allQuestions && allQuestions.length > 0) {
+        startQuiz(allQuestions[0].subject);
+    } else {
+        console.log("⚠ Data not loaded yet");
+    }
+}
+
+
+/* 🎯 START QUIZ (BY SUBJECT) */
 function startQuiz(subject) {
 
-  console.log("🎯 Selected Subject:", subject);
+    console.log("🎯 Subject Selected:", subject);
 
-  quizData = allQuestions.filter(q =>
-    q.subject && q.subject.trim() === subject.trim()
-  );
+    quizData = allQuestions.filter(q =>
+        q.subject && q.subject.trim() === subject.trim()
+    );
 
-  current = 0;
-  score = 0;
+    current = 0;
+    score = 0;
 
-  console.log("🧠 Filtered Questions:", quizData);
+    console.log("🧠 Filtered Questions:", quizData);
 
-  if (quizData.length === 0) {
-    alert("No questions found for this subject!");
-    return;
-  }
+    if (quizData.length === 0) {
+        alert("No questions found for this subject!");
+        return;
+    }
 
-  showQuestion();
+    showQuestion();
 }
 
 
-// ❓ SHOW QUESTION
+/* ❓ SHOW QUESTION */
 function showQuestion() {
 
-  let q = quizData[current];
+    let q = quizData[current];
 
-  if (!q) return;
+    if (!q) {
+        console.log("❌ No question found");
+        return;
+    }
 
-  document.getElementById("question").innerText = q.question;
+    document.getElementById("question").innerText = q.question;
 
-  let box = document.getElementById("options");
-  box.innerHTML = "";
+    let box = document.getElementById("options");
+    box.innerHTML = "";
 
-  [q.option1, q.option2, q.option3, q.option4].forEach(opt => {
+    [q.option1, q.option2, q.option3, q.option4].forEach(opt => {
 
-    let btn = document.createElement("button");
-    btn.innerText = opt;
-    btn.className = "option-btn";
+        let btn = document.createElement("button");
+        btn.innerText = opt;
+        btn.className = "option-btn";
 
-    btn.onclick = () => checkAnswer(opt);
+        btn.onclick = () => checkAnswer(opt);
 
-    box.appendChild(btn);
-  });
+        box.appendChild(btn);
+    });
 }
 
 
-// ✅ CHECK ANSWER
+/* ✅ CHECK ANSWER */
 function checkAnswer(selected) {
 
-  if (selected === quizData[current].answer) {
-    score++;
-  }
+    if (selected === quizData[current].answer) {
+        score++;
+    }
 }
 
 
-// 🔁 NEXT QUESTION
+/* 🔁 NEXT QUESTION */
 function nextQuestion() {
 
-  current++;
+    current++;
 
-  if (current < quizData.length) {
-    showQuestion();
-  } else {
-    document.getElementById("quizSection").innerHTML =
-      `<h2>Quiz Completed!</h2>
-       <p>Your Score: ${score} / ${quizData.length}</p>`;
-  }
-}
+    if (current < quizData.length) {
+        showQuestion();
+    } else {
 
-
-// 🎮 OPEN QUIZ SECTION
-function openQuiz() {
-  document.getElementById("quizSection").style.display = "block";
+        document.getElementById("quizSection").innerHTML = `
+            <h2>Quiz Completed!</h2>
+            <p>Your Score: ${score} / ${quizData.length}</p>
+        `;
+    }
 }
