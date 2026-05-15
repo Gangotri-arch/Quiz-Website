@@ -3,31 +3,147 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Website</title>
-  <link rel="stylesheet" href="style.css"/>
+  <title>Study Website</title>
+
+  <!-- Basic internal styling so it looks clean even without CSS file -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f4f4f4;
+    }
+
+    header {
+      background: #222;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      background: white;
+      margin: 15px;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin: 8px 0;
+    }
+
+    ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    h2, h3 {
+      color: #222;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #222;
+      color: white;
+      margin-top: 20px;
+    }
+  </style>
 </head>
+
 <body>
 
-  <header>
-    <h1>Welcome to My Website</h1>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-    </nav>
-  </header>
+<header>
+  <h1>Study Website</h1>
 
-  <main>
-    <section class="hero">
-      <h2>Hello!</h2>
-      <p>This is my simple website.</p>
-    </section>
-  </main>
+  <nav>
+    <a href="#current">Current</a>
+    <a href="#quiz">Quiz</a>
+    <a href="#maths">Maths</a>
+    <a href="#reasoning">Reasoning</a>
+  </nav>
+</header>
 
-  <footer>
-    <p>© 2026 My Website</p>
-  </footer>
+<main>
 
-  <script src="script.js"></script>
+  <!-- CURRENT -->
+  <section id="current">
+    <h2>Current Affairs</h2>
+    <p>Yahan daily current affairs update aayega.</p>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <h2>Quiz Section</h2>
+
+    <p>Select Category:</p>
+
+    <ul>
+      <li><a href="#history">History</a></li>
+      <li><a href="#art">Art & Culture</a></li>
+      <li><a href="#geography">Geography</a></li>
+      <li><a href="#polity">Polity & Economics</a></li>
+      <li><a href="#science">Science</a></li>
+    </ul>
+
+    <hr>
+
+    <div id="history">
+      <h3>History</h3>
+      <p>History quiz content here.</p>
+    </div>
+
+    <div id="art">
+      <h3>Art & Culture</h3>
+      <p>Art & Culture quiz content here.</p>
+    </div>
+
+    <div id="geography">
+      <h3>Geography</h3>
+      <p>Geography quiz content here.</p>
+    </div>
+
+    <div id="polity">
+      <h3>Polity & Economics</h3>
+      <p>Polity & Economics quiz content here.</p>
+    </div>
+
+    <div id="science">
+      <h3>Science</h3>
+      <p>Science quiz content here.</p>
+    </div>
+
+  </section>
+
+  <!-- MATHS -->
+  <section id="maths">
+    <h2>Maths</h2>
+    <p>Maths practice questions yahan rahenge.</p>
+  </section>
+
+  <!-- REASONING -->
+  <section id="reasoning">
+    <h2>Reasoning</h2>
+    <p>Reasoning practice questions yahan rahenge.</p>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Study Website</p>
+</footer>
+
 </body>
 </html>
