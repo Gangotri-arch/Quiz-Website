@@ -1,3 +1,27 @@
+const supabaseUrl = "https://sorwebstkjxtophrbboh.supabase.co/rest/v1/";
+const supabaseKey = "sb_publishable_Idq6skWlkQA8FAOS7a6OSg_ltUSaTrE";
+
+const supabaseClient = supabase.createClient(
+  supabaseUrl,
+  supabaseKey
+);
+
+async function loadQuestions() {
+  const { data, error } = await supabaseClient
+    .from("questions")
+    .select("*");
+
+  if (error) {
+    console.log("Error:", error);
+    return;
+  }
+
+  console.log(data);
+}
+
+loadQuestions();
+
+let allQuestions = ...
 let allQuestions = [];
 let quizData = [];
 let current = 0;
