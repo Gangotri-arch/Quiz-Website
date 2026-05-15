@@ -236,14 +236,30 @@
 </section>
 
 <section id="quiz">
-  <h2>Quiz</h2>
+  <h2>Quiz Subjects</h2>
 
-  <button onclick="startQuiz('GK')">Start GK Quiz</button>
+  <div class="quiz-grid">
 
-  <div id="quizSection">
-    <h3 id="question"></h3>
-    <div id="options"></div>
+    <div class="quiz-box" onclick="startQuiz('Art & Culture')">Art & Culture</div>
+
+    <div class="quiz-box" onclick="startQuiz('History')">History</div>
+
+    <div class="quiz-box" onclick="startQuiz('Geography')">Geography</div>
+
+    <div class="quiz-box" onclick="startQuiz('Economics')">Economics</div>
+
+    <div class="quiz-box" onclick="startQuiz('Polity')">Polity</div>
+
+    <div class="quiz-box" onclick="startQuiz('Science')">Science</div>
+
   </div>
+</section>
+
+<!-- QUIZ SCREEN -->
+<div id="quizSection">
+  <h3 id="question"></h3>
+  <div id="options"></div>
+</div>
 </section>
 
 <section id="maths">
