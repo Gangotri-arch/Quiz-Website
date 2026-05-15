@@ -21,7 +21,6 @@ async function loadQuestions() {
 
 loadQuestions();
 
-let allQuestions = ...
 let allQuestions = [];
 let quizData = [];
 let current = 0;
