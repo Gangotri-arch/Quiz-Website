@@ -21,8 +21,9 @@ fetch("https://script.google.com/macros/s/AKfycby8HXAFfJLGU9wIO7JLV7Fbv-3O--Nu3K
 /* 🎮 OPEN QUIZ */
 function openQuiz() {
 
-    document.getElementById("quizSection").style.display = "block";
+   document.getElementById("quizSection").style.display = "block";
 
+    waitForDataAndStart(allQuestions[0]?.subject || "Art & Culture");
     // auto start first subject safely
     if (allQuestions && allQuestions.length > 0) {
         startQuiz(allQuestions[0].subject);
@@ -34,6 +35,21 @@ function openQuiz() {
 
 /* 🎯 START QUIZ (BY SUBJECT) */
 function startQuiz(subject) {
+    function waitForDataAndStart(subject) {
+
+    let check = setInterval(() => {
+
+        if (allQuestions.length > 0) {
+
+            clearInterval(check);
+            startQuiz(subject);
+
+        } else {
+            console.log("⏳ Waiting for data...");
+        }
+
+    }, 300);
+}
 
     console.log("🎯 Subject Selected:", subject);
 
