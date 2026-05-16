@@ -54,25 +54,32 @@ function showQuestion() {
   let q = quizData[current];
 
   document.getElementById("question").innerText =
-    q.question;
 
+`Question ${current + 1}: ${q.question}`;
   let box =
     document.getElementById("options");
 
   box.innerHTML = "";
 
-  [
-    q.option_a,
-    q.option_b,
-    q.option_c,
-    q.option_d
+ const options = [
 
-  ].forEach(opt => {
+  { label: "A", value: q.option_a },
+
+  { label: "B", value: q.option_b },
+
+  { label: "C", value: q.option_c },
+
+  { label: "D", value: q.option_d }
+
+];
+
+options.forEach(item => {
 
     let btn =
       document.createElement("button");
 
-    btn.innerText = opt;
+  btn.innerText =
+`${item.label}. ${item.value}`;
 
     btn.classList.add("option-btn");
 
@@ -86,7 +93,7 @@ function showQuestion() {
         b.disabled = true;
       });
 
-      if (opt === q.correct_answer) {
+      if (item.value === q.correct_answer){
 
         btn.classList.add("correct");
 
@@ -98,9 +105,8 @@ function showQuestion() {
 
         allButtons.forEach(b => {
 
-          if (
-            b.innerText === q.correct_answer
-          ) {
+          if (b.innerText.includes(q.correct_answer))
+          {
 
             b.classList.add("correct");
           }
