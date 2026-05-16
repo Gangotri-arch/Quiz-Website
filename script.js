@@ -74,39 +74,45 @@ function showQuestion() {
 
     btn.innerText = opt;
 
+    btn.classList.add("option-btn");
+
     btn.onclick = () => {
 
-  const buttons =
-    document.querySelectorAll("#options button");
+      const allButtons =
+        document.querySelectorAll(".option-btn");
 
-  buttons.forEach(b => b.disabled = true);
+      allButtons.forEach(b => {
 
-  if (opt === q.correct_answer) {
+        b.disabled = true;
+      });
 
-    btn.style.backgroundColor = "green";
+      if (opt === q.correct_answer) {
 
-    score++;
+        btn.classList.add("correct");
 
-  } else {
+        score++;
 
-    btn.style.backgroundColor = "red";
+      } else {
 
-    buttons.forEach(b => {
+        btn.classList.add("wrong");
 
-      if (b.innerText === q.correct_answer) {
+        allButtons.forEach(b => {
 
-        b.style.backgroundColor = "green";
+          if (
+            b.innerText === q.correct_answer
+          ) {
+
+            b.classList.add("correct");
+          }
+        });
       }
 
-    });
-  }
+      setTimeout(() => {
 
-  setTimeout(() => {
+        nextQuestion();
 
-    nextQuestion();
-
-  }, 1000);
-};
+      }, 1000);
+    };
 
     box.appendChild(btn);
   });
