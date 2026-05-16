@@ -11,16 +11,13 @@
       font-family: "Segoe UI", Arial, sans-serif;
       background: #f3f4f6;
       transition: 0.3s;
-      scroll-behavior: smooth;
     }
 
-    /* DARK MODE */
     body.dark {
       background: #0f172a;
       color: white;
     }
 
-    /* HEADER */
     header {
       background: linear-gradient(135deg, #111827, #1f2937);
       color: white;
@@ -39,7 +36,6 @@
       color: #cbd5e1;
     }
 
-    /* TOP RIGHT BUTTONS (IMPORTANT FIX) */
     .top-buttons {
       position: absolute;
       top: 15px;
@@ -67,22 +63,6 @@
       color: white;
     }
 
-    nav {
-      margin-top: 10px;
-    }
-
-    nav a {
-      color: white;
-      margin: 0 10px;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    nav a:hover {
-      color: #38bdf8;
-    }
-
-    /* HOME CARDS */
     .container {
       max-width: 1100px;
       margin: 40px auto;
@@ -98,9 +78,9 @@
       border-radius: 16px;
       text-align: center;
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      transition: 0.3s;
       text-decoration: none;
       color: black;
+      transition: 0.3s;
     }
 
     body.dark .card {
@@ -127,53 +107,6 @@
       margin-bottom: 10px;
     }
 
-    /* SECTIONS */
-    section {
-      max-width: 1000px;
-      margin: 25px auto;
-      background: white;
-      padding: 25px;
-      border-radius: 14px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-    }
-
-    body.dark section {
-      background: #1e293b;
-    }
-
-    section h2 {
-      border-left: 5px solid #3b82f6;
-      padding-left: 10px;
-    }
-
-    /* QUIZ */
-    .quiz-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      margin-top: 15px;
-    }
-
-    .quiz-box {
-      background: #f9fafb;
-      border: 1px solid #ddd;
-      padding: 15px;
-      border-radius: 10px;
-      text-align: center;
-      transition: 0.3s;
-    }
-
-    body.dark .quiz-box {
-      background: #0f172a;
-      border-color: #334155;
-    }
-
-    .quiz-box:hover {
-      background: #dbeafe;
-      transform: scale(1.05);
-      cursor: pointer;
-    }
-
     footer {
       text-align: center;
       padding: 15px;
@@ -181,7 +114,6 @@
       color: white;
       margin-top: 40px;
     }
-
   </style>
 </head>
 
@@ -191,84 +123,36 @@
   <h1>TrendWise GK</h1>
   <p>Learn Smarter • Practice Better • Score Higher</p>
 
-  <!-- FIXED BUTTON AREA -->
   <div class="top-buttons">
     <button class="dark-btn" onclick="toggleDark()">🌙 Night</button>
     <button class="lang-btn" onclick="toggleLang()">🌐 Lang</button>
   </div>
-
-  <nav>
-    <a href="#current">Current</a>
-    <a href="#quiz">Quiz</a>
-    <a href="#maths">Maths</a>
-    <a href="#reasoning">Reasoning</a>
-  </nav>
 </header>
 
-<!-- HOME -->
+<!-- HOME CARDS ONLY -->
 <div class="container">
 
-  <a href="#current" class="card">
+  <a href="current.html" class="card">
     <div class="tag">Daily</div>
     <h2 id="t1">Current Affairs</h2>
   </a>
 
-  <a href="#quiz" class="card">
+  <a href="quiz.html" class="card">
     <div class="tag">Practice</div>
     <h2 id="t2">Quiz</h2>
   </a>
 
-  <a href="#maths" class="card">
+  <a href="maths.html" class="card">
     <div class="tag">Math</div>
     <h2 id="t3">Maths</h2>
   </a>
 
-  <a href="#reasoning" class="card">
+  <a href="reasoning.html" class="card">
     <div class="tag">Logic</div>
     <h2 id="t4">Reasoning</h2>
   </a>
 
 </div>
-
-<!-- SECTIONS -->
-<section id="current">
-  <h2>Current Affairs</h2>
-</section>
-
-<section id="quiz">
-  <h2>Quiz Subjects</h2>
-
-  <div class="quiz-grid">
-
-    <div class="quiz-box" onclick="startQuiz('Art & Culture')">Art & Culture</div>
-
-    <div class="quiz-box" onclick="startQuiz('History')">History</div>
-
-    <div class="quiz-box" onclick="startQuiz('Geography')">Geography</div>
-
-    <div class="quiz-box" onclick="startQuiz('Economics')">Economics</div>
-
-    <div class="quiz-box" onclick="startQuiz('Polity')">Polity</div>
-
-    <div class="quiz-box" onclick="startQuiz('Science')">Science</div>
-
-  </div>
-</section>
-
-<!-- QUIZ SCREEN -->
-<div id="quizSection">
-  <h3 id="question"></h3>
-  <div id="options"></div>
-</div>
-</section>
-
-<section id="maths">
-  <h2>Maths</h2>
-</section>
-
-<section id="reasoning">
-  <h2>Reasoning</h2>
-</section>
 
 <footer>
   © 2026 TrendWise GK
@@ -290,7 +174,6 @@
     document.getElementById("t4").innerText = english ? "Reasoning" : "रीजनिंग";
   }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="script.js"></script>
+
 </body>
 </html>
