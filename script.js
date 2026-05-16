@@ -76,13 +76,37 @@ function showQuestion() {
 
     btn.onclick = () => {
 
-      if (opt === q.correct_answer) {
+  const buttons =
+    document.querySelectorAll("#options button");
 
-        score++;
+  buttons.forEach(b => b.disabled = true);
+
+  if (opt === q.correct_answer) {
+
+    btn.style.backgroundColor = "green";
+
+    score++;
+
+  } else {
+
+    btn.style.backgroundColor = "red";
+
+    buttons.forEach(b => {
+
+      if (b.innerText === q.correct_answer) {
+
+        b.style.backgroundColor = "green";
       }
 
-      nextQuestion();
-    };
+    });
+  }
+
+  setTimeout(() => {
+
+    nextQuestion();
+
+  }, 1000);
+};
 
     box.appendChild(btn);
   });
