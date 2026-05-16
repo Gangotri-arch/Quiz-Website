@@ -148,3 +148,58 @@ function nextQuestion() {
       `;
   }
 }
+let reviewQuestions = [];
+
+function previousQuestion() {
+
+  if(current > 0) {
+
+    current--;
+
+    showQuestion();
+  }
+}
+
+function markForReview() {
+
+  reviewQuestions.push(current);
+
+  alert(
+    `Question ${current + 1} marked for review`
+  );
+
+  nextQuestion();
+}
+
+function submitQuiz() {
+
+  document.getElementById("quizSection")
+    .innerHTML = `
+
+    <h2>Quiz Submitted</h2>
+
+    <p>
+      Final Score:
+      ${score} / ${quizData.length}
+    </p>
+
+    <p>
+      Marked For Review:
+      ${reviewQuestions.length}
+    </p>
+
+  `;
+}
+
+let englishQuiz = true;
+
+function toggleQuizLanguage() {
+
+  englishQuiz = !englishQuiz;
+
+  alert(
+    englishQuiz
+    ? "English Enabled"
+    : "Hindi Enabled"
+  );
+}
