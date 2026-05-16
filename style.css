@@ -124,3 +124,17 @@ footer {
 
   background: #1d4ed8;
 }
+#quizSection .quiz-buttons button {
+
+  background: #111827 !important;
+
+  color: white !important;
+
+  border: none;
+
+}
+
+#quizSection .quiz-buttons button:hover {
+
+  background: #000000 !important;
+}
