@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0"/>
+
   <title>TrendWise GK</title>
 
   <style>
+
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
@@ -19,20 +25,25 @@
     }
 
     header {
-      background: linear-gradient(135deg, #111827, #1f2937);
+      background:
+      linear-gradient(135deg,#111827,#1f2937);
+
       color: white;
+
       text-align: center;
+
       padding: 25px 15px;
+
       position: relative;
     }
 
     header h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: 32px;
     }
 
     header p {
-      margin-top: 5px;
+      margin-top: 8px;
       color: #cbd5e1;
     }
 
@@ -63,117 +74,332 @@
       color: white;
     }
 
+    /* HERO SECTION */
+
+    .hero {
+
+      text-align: center;
+
+      padding: 70px 20px;
+
+      background:
+      linear-gradient(135deg,#2563eb,#7c3aed);
+
+      color: white;
+    }
+
+    .hero h2 {
+
+      font-size: 42px;
+
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+
+      font-size: 18px;
+
+      max-width: 700px;
+
+      margin: auto;
+
+      opacity: 0.9;
+
+      line-height: 1.6;
+    }
+
+    .hero button {
+
+      margin-top: 25px;
+
+      padding: 14px 28px;
+
+      border: none;
+
+      border-radius: 12px;
+
+      background: white;
+
+      color: #2563eb;
+
+      font-size: 16px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: 0.3s;
+    }
+
+    .hero button:hover {
+
+      transform: scale(1.05);
+    }
+
+    /* CARDS */
+
     .container {
+
       max-width: 1100px;
-      margin: 40px auto;
+
+      margin: -40px auto 40px;
+
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+      grid-template-columns:
+      repeat(auto-fit,minmax(220px,1fr));
+
       gap: 20px;
+
       padding: 0 20px;
     }
 
     .card {
+
       background: white;
+
       padding: 25px;
-      border-radius: 16px;
+
+      border-radius: 18px;
+
       text-align: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+
+      box-shadow:
+      0 8px 20px rgba(0,0,0,0.08);
+
       text-decoration: none;
+
       color: black;
+
       transition: 0.3s;
+
+      position: relative;
+
+      overflow: hidden;
     }
 
-    body.dark .card {
-      background: #1e293b;
-      color: white;
+    .card::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 120px;
+
+      height: 120px;
+
+      background:
+      rgba(255,255,255,0.3);
+
+      border-radius: 50%;
+
+      top: -40px;
+
+      right: -40px;
     }
 
     .card:hover {
-      transform: translateY(-8px);
+
+      transform:
+      translateY(-10px) scale(1.03);
+
       background: #dbeafe;
     }
 
+    body.dark .card {
+
+      background: #1e293b;
+
+      color: white;
+    }
+
     body.dark .card:hover {
+
       background: #334155;
     }
 
     .tag {
+
       display: inline-block;
+
       padding: 5px 10px;
+
       border-radius: 20px;
+
       font-size: 12px;
+
       background: #dbeafe;
+
       color: #1d4ed8;
+
       margin-bottom: 10px;
     }
 
+    .card h2 {
+
+      margin-top: 10px;
+
+      font-size: 24px;
+    }
+
+    /* FOOTER */
+
     footer {
+
       text-align: center;
+
       padding: 15px;
+
       background: #111827;
+
       color: white;
+
       margin-top: 40px;
     }
+
+    body.dark .hero {
+
+      background:
+      linear-gradient(135deg,#0f172a,#1e293b);
+    }
+
   </style>
+
 </head>
 
 <body>
 
 <header>
+
   <h1>TrendWise GK</h1>
-  <p>Learn Smarter • Practice Better • Score Higher</p>
+
+  <p>
+    Learn Smarter • Practice Better • Score Higher
+  </p>
 
   <div class="top-buttons">
-    <button class="dark-btn" onclick="toggleDark()">🌙 Night</button>
-    <button class="lang-btn" onclick="toggleLang()">🌐 Lang</button>
+
+    <button class="dark-btn"
+            onclick="toggleDark()">
+
+      🌙 Night
+
+    </button>
+
+    <button class="lang-btn"
+            onclick="toggleLang()">
+
+      🌐 Lang
+
+    </button>
+
   </div>
+
 </header>
 
-<!-- HOME CARDS ONLY -->
+<!-- HERO SECTION -->
+
+<section class="hero">
+
+  <h2>
+    Crack Exams With Smart Practice
+  </h2>
+
+  <p>
+    Practice Current Affairs, Maths,
+    Reasoning and Quiz Questions
+    with unlimited learning.
+  </p>
+
+  <button
+    onclick="window.location.href='quiz.html'">
+
+    Start Learning
+
+  </button>
+
+</section>
+
+<!-- HOME CARDS -->
+
 <div class="container">
 
   <a href="current.html" class="card">
+
     <div class="tag">Daily</div>
+
     <h2 id="t1">Current Affairs</h2>
+
   </a>
 
   <a href="quiz.html" class="card">
+
     <div class="tag">Practice</div>
+
     <h2 id="t2">Quiz</h2>
+
   </a>
 
   <a href="maths.html" class="card">
+
     <div class="tag">Math</div>
+
     <h2 id="t3">Maths</h2>
+
   </a>
 
   <a href="reasoning.html" class="card">
+
     <div class="tag">Logic</div>
+
     <h2 id="t4">Reasoning</h2>
+
   </a>
 
 </div>
 
 <footer>
+
   © 2026 TrendWise GK
+
 </footer>
 
 <script>
+
   function toggleDark() {
+
     document.body.classList.toggle("dark");
   }
 
   let english = true;
 
   function toggleLang() {
+
     english = !english;
 
-    document.getElementById("t1").innerText = english ? "Current Affairs" : "करंट अफेयर्स";
-    document.getElementById("t2").innerText = english ? "Quiz" : "क्विज";
-    document.getElementById("t3").innerText = english ? "Maths" : "गणित";
-    document.getElementById("t4").innerText = english ? "Reasoning" : "रीजनिंग";
+    document.getElementById("t1").innerText =
+      english
+      ? "Current Affairs"
+      : "करंट अफेयर्स";
+
+    document.getElementById("t2").innerText =
+      english
+      ? "Quiz"
+      : "क्विज";
+
+    document.getElementById("t3").innerText =
+      english
+      ? "Maths"
+      : "गणित";
+
+    document.getElementById("t4").innerText =
+      english
+      ? "Reasoning"
+      : "रीजनिंग";
   }
+
 </script>
 
 </body>
+
 </html>
