@@ -4,7 +4,7 @@ const supabaseKey ="sb_publishable_Idq6skWlkQA8FAOS7a6OSg_ltUSaTrE";
 
 const supabaseClient =
 supabase.createClient(supabaseUrl, supabaseKey);
-
+let timeTaken = 0;
 let quizData = [];
 
 let current = 0;
