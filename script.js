@@ -212,10 +212,11 @@ function startTimer() {
   clearInterval(timerInterval);
 
   timeLeft = 600;
+  timeTaken = 0;
 
   timerInterval = setInterval(() => {
 
-    timeTaken++; // ⭐ already added variable
+    timeTaken++;
 
     let min = Math.floor(timeLeft / 60);
     let sec = timeLeft % 60;
