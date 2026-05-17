@@ -125,6 +125,25 @@ options.forEach(item => {
 
     box.appendChild(btn);
   });
+  let panel = document.getElementById("questionPanel");
+
+panel.innerHTML = "";
+
+for(let i = 0; i < quizData.length; i++) {
+
+   let qBtn = document.createElement("button");
+
+   qBtn.innerText = i + 1;
+
+   qBtn.onclick = () => {
+
+      current = i;
+
+      showQuestion();
+   };
+
+   panel.appendChild(qBtn);
+}
 }
 
 /* NEXT QUESTION */
