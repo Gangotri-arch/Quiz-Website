@@ -135,10 +135,13 @@ for(let i = 0; i < quizData.length; i++) {
    let qBtn = document.createElement("button");
 
    qBtn.innerText = i + 1;
-  qBtn.style.background = "gray";
   if(attemptedQuestions.includes(i)){
 
    qBtn.style.background = "green";
+}
+  else{
+
+   qBtn.style.background = "gray";
 }
 
    qBtn.onclick = () => {
