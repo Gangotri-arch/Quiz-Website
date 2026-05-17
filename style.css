@@ -162,18 +162,23 @@ footer {
     font-weight:bold;
 }
 #questionPanel{
-    display:flex !important;
-    flex-direction:row !important;
-    flex-wrap:wrap !important;
+
+    position:fixed;
+
+    right:20px;
+    top:150px;
+
+    display:flex;
+
+    flex-direction:column;
 
     gap:10px;
 
-    justify-content:center;
-
-    margin-top:20px;
+    z-index:999;
 }
 
 #questionPanel button{
+
     width:45px;
     height:45px;
 
