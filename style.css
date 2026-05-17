@@ -191,3 +191,7 @@ footer {
     cursor:pointer;
     font-weight:bold;
 }
+.current-question{
+
+    background:orange !important;
+}
