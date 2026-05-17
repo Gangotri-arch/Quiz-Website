@@ -45,6 +45,7 @@ async function loadCategoryQuestions(category) {
   }
 
   showQuestion();
+  startTimer();
 }
 
 /* SHOW QUESTION */
@@ -202,4 +203,32 @@ function toggleQuizLanguage() {
     ? "English Enabled"
     : "Hindi Enabled"
   );
+}
+let timeLeft = 600;
+let timerInterval;
+
+function startTimer() {
+
+  clearInterval(timerInterval);
+
+  timeLeft = 600;
+
+  timerInterval = setInterval(() => {
+
+    timeTaken++; // ⭐ already added variable
+
+    let min = Math.floor(timeLeft / 60);
+    let sec = timeLeft % 60;
+
+    document.getElementById("timer").innerText =
+      `Time Left: ${min}:${sec < 10 ? "0"+sec : sec}`;
+
+    timeLeft--;
+
+    if (timeLeft < 0) {
+      clearInterval(timerInterval);
+      submitQuiz();
+    }
+
+  }, 1000);
 }
