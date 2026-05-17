@@ -138,3 +138,26 @@ footer {
 
   background: #000000 !important;
 }
+#questionPanel{
+    position:fixed;
+    right:20px;
+    top:120px;
+
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+#questionPanel button{
+    width:45px;
+    height:45px;
+
+    border:none;
+    border-radius:8px;
+
+    background:#007bff;
+    color:white;
+
+    cursor:pointer;
+    font-weight:bold;
+}
