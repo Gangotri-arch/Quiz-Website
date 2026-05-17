@@ -11,7 +11,7 @@ let current = 0;
 
 let score = 0;
 let wrong = 0;
-
+let attemptedQuestions = [];
 /* LOAD QUESTIONS BY CATEGORY */
 
 async function loadCategoryQuestions(category) {
@@ -86,6 +86,7 @@ options.forEach(item => {
     btn.classList.add("option-btn");
 
     btn.onclick = () => {
+      attemptedQuestions.push(current);
 
       const allButtons =
         document.querySelectorAll(".option-btn");
@@ -134,6 +135,10 @@ for(let i = 0; i < quizData.length; i++) {
    let qBtn = document.createElement("button");
 
    qBtn.innerText = i + 1;
+  if(attemptedQuestions.includes(i)){
+
+   qBtn.style.background = "green";
+}
 
    qBtn.onclick = () => {
 
