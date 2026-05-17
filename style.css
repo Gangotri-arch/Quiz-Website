@@ -161,3 +161,28 @@ footer {
     cursor:pointer;
     font-weight:bold;
 }
+#questionPanel{
+    display:flex !important;
+    flex-direction:row !important;
+    flex-wrap:wrap !important;
+
+    gap:10px;
+
+    justify-content:center;
+
+    margin-top:20px;
+}
+
+#questionPanel button{
+    width:45px;
+    height:45px;
+
+    border:none;
+    border-radius:8px;
+
+    background:#007bff;
+    color:white;
+
+    cursor:pointer;
+    font-weight:bold;
+}
