@@ -134,10 +134,6 @@ for(let i = 0; i < quizData.length; i++) {
    let qBtn = document.createElement("button");
 
    qBtn.innerText = i + 1;
-  if(i === current){
-  
-   qBtn.classList.add("current-question");
-}
 
    qBtn.onclick = () => {
 
