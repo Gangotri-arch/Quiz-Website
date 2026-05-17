@@ -10,6 +10,7 @@ let quizData = [];
 let current = 0;
 
 let score = 0;
+let wrong = 0;
 
 /* LOAD QUESTIONS BY CATEGORY */
 
@@ -101,8 +102,9 @@ options.forEach(item => {
         score++;
 
       } else {
-
+   wrong++;
         btn.classList.add("wrong");
+        
 
         allButtons.forEach(b => {
 
@@ -142,9 +144,21 @@ function nextQuestion() {
 
       <h2>Quiz Completed</h2>
 
-      <p>
-        Score: ${score} / ${quizData.length}
-      </p>
+<p>
+  Total Questions: ${quizData.length}
+</p>
+
+<p>
+  Correct Answers: ${score}
+</p>
+
+<p>
+  Wrong Answers: ${wrong}
+</p>
+
+<p>
+  Final Score: ${score} / ${quizData.length}
+</p>
 
       `;
   }
