@@ -135,7 +135,8 @@ for(let i = 0; i < quizData.length; i++) {
 
    qBtn.innerText = i + 1;
   if(i === current){
-   qBtn.style.background = "orange";
+  
+   qBtn.classList.add("current-question");
 }
 
    qBtn.onclick = () => {
